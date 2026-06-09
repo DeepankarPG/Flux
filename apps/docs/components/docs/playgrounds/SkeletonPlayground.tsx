@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartSkeleton, Shimmer, Stack, StatCardSkeleton, TableRowSkeleton } from "@flux/ui";
+import { ChartSkeleton, Shimmer, Stack, StatCardSkeleton, TableRowSkeleton } from "@payglocal_flux/ui";
 
 export function SkeletonPlayground() {
   return (

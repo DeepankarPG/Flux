@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
   Stack,
-} from "@flux/ui";
+} from "@payglocal_flux/ui";
 
 export function CardPlayground() {
   return (

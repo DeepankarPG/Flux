@@ -20,7 +20,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     slug: "avatar",
     title: "Avatar",
     description: "Image with fallback for users and entities (Radix Avatar).",
-    importSnippet: `import { Avatar, AvatarFallback, AvatarImage } from "@flux/ui";`,
+    importSnippet: `import { Avatar, AvatarFallback, AvatarImage } from "@payglocal_flux/ui";`,
     usageSnippet: `<Avatar>
   <AvatarImage src="/photo.png" alt="User" />
   <AvatarFallback>FX</AvatarFallback>
@@ -31,7 +31,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     slug: "button",
     title: "Button",
     description: "Actions and form submission with variants, sizes, loading, and icons.",
-    importSnippet: `import { Button } from "@flux/ui";`,
+    importSnippet: `import { Button } from "@payglocal_flux/ui";`,
     usageSnippet: `<Button variant="primary">Continue</Button>
 <Button variant="outline" isLoading>Save</Button>`,
     toc: baseToc,
@@ -41,7 +41,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     title: "Calendar",
     description:
       "React DayPicker with Flux tokens: single, range, dropdown captions, week numbers, presets, RTL, and timezone support.",
-    importSnippet: `import { Calendar, type DateRange } from "@flux/ui";`,
+    importSnippet: `import { Calendar, type DateRange } from "@payglocal_flux/ui";`,
     usageSnippet: `const [date, setDate] = useState<Date | undefined>();
 
 <Calendar
@@ -64,7 +64,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
   CardDescription,
   CardContent,
   CardFooter,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<Card>
   <CardHeader>
     <CardTitle>Title</CardTitle>
@@ -84,7 +84,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@flux/ui";
+} from "@payglocal_flux/ui";
 import { Bar, BarChart, XAxis } from "recharts";`,
     usageSnippet: `const config = {
   sales: { label: "Sales", color: "var(--chart-1)" },
@@ -112,7 +112,7 @@ import { Bar, BarChart, XAxis } from "recharts";`,
   CategoryBarChartTemplate,
   MiniSparklineChartCard,
   AttentionListTemplate,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `// Compose templates with your data; each component is a styled card + chart.
 <DashboardAreaChartTemplate
   title="Gross volume"
@@ -138,7 +138,7 @@ import { Bar, BarChart, XAxis } from "recharts";`,
     slug: "currency-amount-input",
     title: "Currency amount input",
     description: "Amount field with currency selector for payment-style flows.",
-    importSnippet: `import { CurrencyAmountInput } from "@flux/ui";`,
+    importSnippet: `import { CurrencyAmountInput } from "@payglocal_flux/ui";`,
     usageSnippet: `const [currency, setCurrency] = useState("USD");
 const [amount, setAmount] = useState("");
 
@@ -154,7 +154,7 @@ const [amount, setAmount] = useState("");
     slug: "data-table",
     title: "Data table",
     description: "Column-driven table with pagination, loading skeleton, and empty state.",
-    importSnippet: `import { DataTable, type Column } from "@flux/ui";`,
+    importSnippet: `import { DataTable, type Column } from "@payglocal_flux/ui";`,
     usageSnippet: `const columns: Column<Row>[] = [
   { key: "name", header: "Name", render: (r) => r.name },
 ];
@@ -166,7 +166,7 @@ const [amount, setAmount] = useState("");
     slug: "date-picker",
     title: "Date picker",
     description: "Single-date calendar popover with keyboard-friendly grid.",
-    importSnippet: `import { DatePicker } from "@flux/ui";`,
+    importSnippet: `import { DatePicker } from "@payglocal_flux/ui";`,
     usageSnippet: `const [value, setValue] = useState("");
 
 <DatePicker value={value} onChange={setValue} placeholder="Pick a date" />`,
@@ -182,7 +182,7 @@ const [amount, setAmount] = useState("");
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<Dialog>
   <DialogTrigger asChild>
     <button type="button">Open</button>
@@ -203,7 +203,7 @@ const [amount, setAmount] = useState("");
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
     <button type="button">Open</button>
@@ -219,7 +219,7 @@ const [amount, setAmount] = useState("");
     slug: "empty-state",
     title: "Empty state",
     description: "Centered empty panels with title, description, and optional action.",
-    importSnippet: `import { EmptyState, Button } from "@flux/ui";`,
+    importSnippet: `import { EmptyState, Button } from "@payglocal_flux/ui";`,
     usageSnippet: `<EmptyState
   title="No results"
   description="Try adjusting filters."
@@ -238,7 +238,7 @@ const [amount, setAmount] = useState("");
   FieldDescription,
   FieldError,
   Input,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<FieldGroup className="max-w-sm">
   <Field>
     <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -253,7 +253,7 @@ const [amount, setAmount] = useState("");
     slug: "input",
     title: "Input",
     description: "Text field, textarea, and label primitives for forms.",
-    importSnippet: `import { Input, Textarea, Label } from "@flux/ui";`,
+    importSnippet: `import { Input, Textarea, Label } from "@payglocal_flux/ui";`,
     usageSnippet: `<Label htmlFor="x">Name</Label>
 <Input id="x" placeholder="Jane" />
 <Textarea placeholder="Notes" rows={3} />`,
@@ -271,7 +271,7 @@ const [amount, setAmount] = useState("");
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<InputGroup>
   <InputGroupAddon>https://</InputGroupAddon>
   <InputGroupInput placeholder="example.com" />
@@ -283,7 +283,7 @@ const [amount, setAmount] = useState("");
     title: "Layout primitives",
     description:
       "Box, Stack, and Inline helpers with token-aligned spacing props (same Tailwind steps as the dashboard). Prefer Tailwind `className` for radii and colors.",
-    importSnippet: `import { Box, Stack, Inline } from "@flux/ui";`,
+    importSnippet: `import { Box, Stack, Inline } from "@payglocal_flux/ui";`,
     usageSnippet: `<Stack gap="lg">
   <Box p="md" className="rounded-xl border border-border">
     <Stack gap="sm">…</Stack>
@@ -299,7 +299,7 @@ const [amount, setAmount] = useState("");
     slug: "page-header",
     title: "Page header",
     description: "List and detail page titles with optional actions slot.",
-    importSnippet: `import { PageHeader, Button } from "@flux/ui";`,
+    importSnippet: `import { PageHeader, Button } from "@payglocal_flux/ui";`,
     usageSnippet: `<PageHeader
   title="Transactions"
   subtitle="Recent transactions"
@@ -311,7 +311,7 @@ const [amount, setAmount] = useState("");
     slug: "popover",
     title: "Popover",
     description: "Anchored floating panel for filters, pickers, and compact forms.",
-    importSnippet: `import { Popover, PopoverContent, PopoverTrigger } from "@flux/ui";`,
+    importSnippet: `import { Popover, PopoverContent, PopoverTrigger } from "@payglocal_flux/ui";`,
     usageSnippet: `<Popover>
   <PopoverTrigger asChild>
     <button type="button">Open</button>
@@ -324,7 +324,7 @@ const [amount, setAmount] = useState("");
     slug: "scroll-area",
     title: "Scroll area",
     description: "Custom scrollbars for dense panels and sidebars.",
-    importSnippet: `import { ScrollArea } from "@flux/ui";`,
+    importSnippet: `import { ScrollArea } from "@payglocal_flux/ui";`,
     usageSnippet: `<ScrollArea className="h-48 rounded-xl border border-border p-3">
   …long content…
 </ScrollArea>`,
@@ -340,7 +340,7 @@ const [amount, setAmount] = useState("");
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<Select defaultValue="a">
   <SelectTrigger className="w-[200px]">
     <SelectValue placeholder="Choose" />
@@ -356,7 +356,7 @@ const [amount, setAmount] = useState("");
     slug: "separator",
     title: "Separator",
     description: "Visual divider; also composed inside FieldSeparator.",
-    importSnippet: `import { Separator } from "@flux/ui";`,
+    importSnippet: `import { Separator } from "@payglocal_flux/ui";`,
     usageSnippet: `<Separator className="my-4" />
 <Separator orientation="vertical" className="mx-2 h-6" />`,
     toc: baseToc,
@@ -365,7 +365,7 @@ const [amount, setAmount] = useState("");
     slug: "skeleton",
     title: "Skeleton",
     description: "Shimmer placeholders for tables, charts, and stat cards.",
-    importSnippet: `import { Shimmer, StatCardSkeleton, TableRowSkeleton } from "@flux/ui";`,
+    importSnippet: `import { Shimmer, StatCardSkeleton, TableRowSkeleton } from "@payglocal_flux/ui";`,
     usageSnippet: `<StatCardSkeleton />
 <TableRowSkeleton cols={4} />`,
     toc: baseToc,
@@ -374,7 +374,7 @@ const [amount, setAmount] = useState("");
     slug: "sonner",
     title: "Sonner",
     description: "Themed toast host and toast() API (wraps sonner + next-themes).",
-    importSnippet: `import { Toaster, toast } from "@flux/ui";`,
+    importSnippet: `import { Toaster, toast } from "@payglocal_flux/ui";`,
     usageSnippet: `// Root layout
 <Toaster />
 
@@ -386,7 +386,7 @@ toast.success("Saved");`,
     slug: "status-badge",
     title: "Status badge",
     description: "Workflow states for payments, disputes, and settlements.",
-    importSnippet: `import { StatusBadge } from "@flux/ui";`,
+    importSnippet: `import { StatusBadge } from "@payglocal_flux/ui";`,
     usageSnippet: `<StatusBadge status="settled" />
 <StatusBadge status="pending" />`,
     toc: baseToc,
@@ -395,7 +395,7 @@ toast.success("Saved");`,
     slug: "tabs",
     title: "Tabs",
     description: "Section switching without navigation (Radix Tabs).",
-    importSnippet: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@flux/ui";`,
+    importSnippet: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@payglocal_flux/ui";`,
     usageSnippet: `<Tabs defaultValue="a">
   <TabsList>
     <TabsTrigger value="a">Tab A</TabsTrigger>
@@ -415,7 +415,7 @@ toast.success("Saved");`,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@flux/ui";`,
+} from "@payglocal_flux/ui";`,
     usageSnippet: `<TooltipProvider>
   <Tooltip>
     <TooltipTrigger asChild>

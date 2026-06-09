@@ -61,7 +61,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   toast,
-} from "@flux/ui";
+} from "@payglocal_flux/ui";
 import { ButtonPlayground } from "@/components/docs/playgrounds/ButtonPlayground";
 import { CalendarPlayground } from "@/components/docs/playgrounds/CalendarPlayground";
 import { CardPlayground } from "@/components/docs/playgrounds/CardPlayground";

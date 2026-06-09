@@ -1,5 +1,5 @@
 {
-  "name": "@flux/ui",
+  "name": "@deepankarraj/flux-ui",
   "version": "0.1.0",
   "description": "Flux UI primitives — inputs, fields, dialog, data table, charts, calendar, and more (Tailwind v4 + Radix).",
   "license": "MIT",
