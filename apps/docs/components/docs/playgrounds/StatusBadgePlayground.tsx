@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, StatusBadge, STATUS_BADGE_KEYS } from "@payglocal_flux/ui";
+import { Stack, StatusBadge, STATUS_BADGE_KEYS } from "@deepankarraj/flux-ui";
 
 export function StatusBadgePlayground() {
   return (

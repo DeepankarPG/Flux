@@ -7,7 +7,7 @@ import {
   type DataTableFooterSummary,
   type DataTableHeaderStyle,
   StatusBadge,
-} from "@payglocal_flux/ui";
+} from "@deepankarraj/flux-ui";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";
 

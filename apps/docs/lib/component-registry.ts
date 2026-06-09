@@ -20,7 +20,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     slug: "avatar",
     title: "Avatar",
     description: "Image with fallback for users and entities (Radix Avatar).",
-    importSnippet: `import { Avatar, AvatarFallback, AvatarImage } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Avatar, AvatarFallback, AvatarImage } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Avatar>
   <AvatarImage src="/photo.png" alt="User" />
   <AvatarFallback>FX</AvatarFallback>
@@ -31,7 +31,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     slug: "button",
     title: "Button",
     description: "Actions and form submission with variants, sizes, loading, and icons.",
-    importSnippet: `import { Button } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Button } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Button variant="primary">Continue</Button>
 <Button variant="outline" isLoading>Save</Button>`,
     toc: baseToc,
@@ -41,7 +41,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
     title: "Calendar",
     description:
       "React DayPicker with Flux tokens: single, range, dropdown captions, week numbers, presets, RTL, and timezone support.",
-    importSnippet: `import { Calendar, type DateRange } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Calendar, type DateRange } from "@deepankarraj/flux-ui";`,
     usageSnippet: `const [date, setDate] = useState<Date | undefined>();
 
 <Calendar
@@ -64,7 +64,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
   CardDescription,
   CardContent,
   CardFooter,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Card>
   <CardHeader>
     <CardTitle>Title</CardTitle>
@@ -84,7 +84,7 @@ export const COMPONENT_DOC_PAGES: ComponentDocPage[] = [
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@payglocal_flux/ui";
+} from "@deepankarraj/flux-ui";
 import { Bar, BarChart, XAxis } from "recharts";`,
     usageSnippet: `const config = {
   sales: { label: "Sales", color: "var(--chart-1)" },
@@ -112,7 +112,7 @@ import { Bar, BarChart, XAxis } from "recharts";`,
   CategoryBarChartTemplate,
   MiniSparklineChartCard,
   AttentionListTemplate,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `// Compose templates with your data; each component is a styled card + chart.
 <DashboardAreaChartTemplate
   title="Gross volume"
@@ -138,7 +138,7 @@ import { Bar, BarChart, XAxis } from "recharts";`,
     slug: "currency-amount-input",
     title: "Currency amount input",
     description: "Amount field with currency selector for payment-style flows.",
-    importSnippet: `import { CurrencyAmountInput } from "@payglocal_flux/ui";`,
+    importSnippet: `import { CurrencyAmountInput } from "@deepankarraj/flux-ui";`,
     usageSnippet: `const [currency, setCurrency] = useState("USD");
 const [amount, setAmount] = useState("");
 
@@ -154,7 +154,7 @@ const [amount, setAmount] = useState("");
     slug: "data-table",
     title: "Data table",
     description: "Column-driven table with pagination, loading skeleton, and empty state.",
-    importSnippet: `import { DataTable, type Column } from "@payglocal_flux/ui";`,
+    importSnippet: `import { DataTable, type Column } from "@deepankarraj/flux-ui";`,
     usageSnippet: `const columns: Column<Row>[] = [
   { key: "name", header: "Name", render: (r) => r.name },
 ];
@@ -166,7 +166,7 @@ const [amount, setAmount] = useState("");
     slug: "date-picker",
     title: "Date picker",
     description: "Single-date calendar popover with keyboard-friendly grid.",
-    importSnippet: `import { DatePicker } from "@payglocal_flux/ui";`,
+    importSnippet: `import { DatePicker } from "@deepankarraj/flux-ui";`,
     usageSnippet: `const [value, setValue] = useState("");
 
 <DatePicker value={value} onChange={setValue} placeholder="Pick a date" />`,
@@ -182,7 +182,7 @@ const [amount, setAmount] = useState("");
   DialogContent,
   DialogTitle,
   DialogDescription,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Dialog>
   <DialogTrigger asChild>
     <button type="button">Open</button>
@@ -203,7 +203,7 @@ const [amount, setAmount] = useState("");
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
     <button type="button">Open</button>
@@ -219,7 +219,7 @@ const [amount, setAmount] = useState("");
     slug: "empty-state",
     title: "Empty state",
     description: "Centered empty panels with title, description, and optional action.",
-    importSnippet: `import { EmptyState, Button } from "@payglocal_flux/ui";`,
+    importSnippet: `import { EmptyState, Button } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<EmptyState
   title="No results"
   description="Try adjusting filters."
@@ -238,7 +238,7 @@ const [amount, setAmount] = useState("");
   FieldDescription,
   FieldError,
   Input,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<FieldGroup className="max-w-sm">
   <Field>
     <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -253,7 +253,7 @@ const [amount, setAmount] = useState("");
     slug: "input",
     title: "Input",
     description: "Text field, textarea, and label primitives for forms.",
-    importSnippet: `import { Input, Textarea, Label } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Input, Textarea, Label } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Label htmlFor="x">Name</Label>
 <Input id="x" placeholder="Jane" />
 <Textarea placeholder="Notes" rows={3} />`,
@@ -271,7 +271,7 @@ const [amount, setAmount] = useState("");
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<InputGroup>
   <InputGroupAddon>https://</InputGroupAddon>
   <InputGroupInput placeholder="example.com" />
@@ -283,7 +283,7 @@ const [amount, setAmount] = useState("");
     title: "Layout primitives",
     description:
       "Box, Stack, and Inline helpers with token-aligned spacing props (same Tailwind steps as the dashboard). Prefer Tailwind `className` for radii and colors.",
-    importSnippet: `import { Box, Stack, Inline } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Box, Stack, Inline } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Stack gap="lg">
   <Box p="md" className="rounded-xl border border-border">
     <Stack gap="sm">…</Stack>
@@ -299,7 +299,7 @@ const [amount, setAmount] = useState("");
     slug: "page-header",
     title: "Page header",
     description: "List and detail page titles with optional actions slot.",
-    importSnippet: `import { PageHeader, Button } from "@payglocal_flux/ui";`,
+    importSnippet: `import { PageHeader, Button } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<PageHeader
   title="Transactions"
   subtitle="Recent transactions"
@@ -311,7 +311,7 @@ const [amount, setAmount] = useState("");
     slug: "popover",
     title: "Popover",
     description: "Anchored floating panel for filters, pickers, and compact forms.",
-    importSnippet: `import { Popover, PopoverContent, PopoverTrigger } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Popover, PopoverContent, PopoverTrigger } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Popover>
   <PopoverTrigger asChild>
     <button type="button">Open</button>
@@ -324,7 +324,7 @@ const [amount, setAmount] = useState("");
     slug: "scroll-area",
     title: "Scroll area",
     description: "Custom scrollbars for dense panels and sidebars.",
-    importSnippet: `import { ScrollArea } from "@payglocal_flux/ui";`,
+    importSnippet: `import { ScrollArea } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<ScrollArea className="h-48 rounded-xl border border-border p-3">
   …long content…
 </ScrollArea>`,
@@ -340,7 +340,7 @@ const [amount, setAmount] = useState("");
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Select defaultValue="a">
   <SelectTrigger className="w-[200px]">
     <SelectValue placeholder="Choose" />
@@ -356,7 +356,7 @@ const [amount, setAmount] = useState("");
     slug: "separator",
     title: "Separator",
     description: "Visual divider; also composed inside FieldSeparator.",
-    importSnippet: `import { Separator } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Separator } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Separator className="my-4" />
 <Separator orientation="vertical" className="mx-2 h-6" />`,
     toc: baseToc,
@@ -365,7 +365,7 @@ const [amount, setAmount] = useState("");
     slug: "skeleton",
     title: "Skeleton",
     description: "Shimmer placeholders for tables, charts, and stat cards.",
-    importSnippet: `import { Shimmer, StatCardSkeleton, TableRowSkeleton } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Shimmer, StatCardSkeleton, TableRowSkeleton } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<StatCardSkeleton />
 <TableRowSkeleton cols={4} />`,
     toc: baseToc,
@@ -374,7 +374,7 @@ const [amount, setAmount] = useState("");
     slug: "sonner",
     title: "Sonner",
     description: "Themed toast host and toast() API (wraps sonner + next-themes).",
-    importSnippet: `import { Toaster, toast } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Toaster, toast } from "@deepankarraj/flux-ui";`,
     usageSnippet: `// Root layout
 <Toaster />
 
@@ -386,7 +386,7 @@ toast.success("Saved");`,
     slug: "status-badge",
     title: "Status badge",
     description: "Workflow states for payments, disputes, and settlements.",
-    importSnippet: `import { StatusBadge } from "@payglocal_flux/ui";`,
+    importSnippet: `import { StatusBadge } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<StatusBadge status="settled" />
 <StatusBadge status="pending" />`,
     toc: baseToc,
@@ -395,7 +395,7 @@ toast.success("Saved");`,
     slug: "tabs",
     title: "Tabs",
     description: "Section switching without navigation (Radix Tabs).",
-    importSnippet: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@payglocal_flux/ui";`,
+    importSnippet: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@deepankarraj/flux-ui";`,
     usageSnippet: `<Tabs defaultValue="a">
   <TabsList>
     <TabsTrigger value="a">Tab A</TabsTrigger>
@@ -415,7 +415,7 @@ toast.success("Saved");`,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@payglocal_flux/ui";`,
+} from "@deepankarraj/flux-ui";`,
     usageSnippet: `<TooltipProvider>
   <Tooltip>
     <TooltipTrigger asChild>
@@ -424,6 +424,279 @@ toast.success("Saved");`,
     <TooltipContent>Hint</TooltipContent>
   </Tooltip>
 </TooltipProvider>`,
+    toc: baseToc,
+  },
+  {
+    slug: "checkbox",
+    title: "Checkbox",
+    description: "Checkbox input with indeterminate state, sizes, and accessible label support.",
+    importSnippet: `import { Checkbox } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Checkbox id="terms" />
+<label htmlFor="terms">Accept terms and conditions</label>
+
+{/* Indeterminate */}
+<Checkbox checked="indeterminate" />`,
+    toc: baseToc,
+  },
+  {
+    slug: "radio",
+    title: "Radio",
+    description: "Radio group for single selection from a list of options.",
+    importSnippet: `import { RadioGroup, RadioGroupItem } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<RadioGroup defaultValue="card">
+  <RadioGroupItem value="card" id="card" />
+  <label htmlFor="card">Card</label>
+  <RadioGroupItem value="upi" id="upi" />
+  <label htmlFor="upi">UPI</label>
+</RadioGroup>`,
+    toc: baseToc,
+  },
+  {
+    slug: "switch",
+    title: "Switch",
+    description: "Toggle switch for binary on/off settings.",
+    importSnippet: `import { Switch } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Switch id="notifications" />
+<label htmlFor="notifications">Enable notifications</label>`,
+    toc: baseToc,
+  },
+  {
+    slug: "slider",
+    title: "Slider",
+    description: "Range slider for selecting numeric values within a min/max range.",
+    importSnippet: `import { Slider } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [value, setValue] = useState([50]);
+
+<Slider
+  min={0}
+  max={100}
+  step={1}
+  value={value}
+  onValueChange={setValue}
+  className="w-64"
+/>`,
+    toc: baseToc,
+  },
+  {
+    slug: "breadcrumbs",
+    title: "Breadcrumbs",
+    description: "Navigation trail showing current page location within the hierarchy.",
+    importSnippet: `import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/payments">Payments</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Details</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`,
+    toc: baseToc,
+  },
+  {
+    slug: "pagination",
+    title: "Pagination",
+    description: "Page navigation controls for multi-page lists and tables.",
+    importSnippet: `import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+} from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">2</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>`,
+    toc: baseToc,
+  },
+  {
+    slug: "alert",
+    title: "Alert",
+    description: "Inline status messages for info, success, warning, and error states.",
+    importSnippet: `import { Alert, AlertTitle, AlertDescription } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Alert variant="info">
+  <AlertTitle>Heads up</AlertTitle>
+  <AlertDescription>Your payout will be processed in 2 business days.</AlertDescription>
+</Alert>
+
+<Alert variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>Payment failed. Please try again.</AlertDescription>
+</Alert>`,
+    toc: baseToc,
+  },
+  {
+    slug: "badge",
+    title: "Badge",
+    description: "Generic label chip for categorization, counts, and status indicators.",
+    importSnippet: `import { Badge } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Badge>Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Error</Badge>
+<Badge variant="outline">Outline</Badge>`,
+    toc: baseToc,
+  },
+  {
+    slug: "tag",
+    title: "Tag",
+    description: "Removable label chips for filters and multi-select values.",
+    importSnippet: `import { Tag, TagGroup } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<TagGroup>
+  <Tag onRemove={() => {}}>Visa</Tag>
+  <Tag onRemove={() => {}}>Mastercard</Tag>
+  <Tag onRemove={() => {}}>UPI</Tag>
+</TagGroup>`,
+    toc: baseToc,
+  },
+  {
+    slug: "spinner",
+    title: "Spinner",
+    description: "Loading indicator for async operations and pending states.",
+    importSnippet: `import { Spinner } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Spinner />
+<Spinner size="sm" />
+<Spinner size="lg" className="text-primary" />`,
+    toc: baseToc,
+  },
+  {
+    slug: "drawer",
+    title: "Drawer",
+    description: "Slide-in panel from any edge for secondary content and forms.",
+    importSnippet: `import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Drawer>
+  <DrawerTrigger asChild>
+    <button type="button">Open drawer</button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Filter transactions</DrawerTitle>
+    </DrawerHeader>
+    <p className="px-4">Content goes here.</p>
+  </DrawerContent>
+</Drawer>`,
+    toc: baseToc,
+  },
+  {
+    slug: "progress",
+    title: "Progress",
+    description: "Progress bar and step tracker for multi-step flows and completion states.",
+    importSnippet: `import { Progress, ProgressTracker } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `{/* Linear progress bar */}
+<Progress value={60} className="w-full" />
+
+{/* Step tracker */}
+<ProgressTracker
+  steps={["Details", "Review", "Confirm"]}
+  currentStep={1}
+/>`,
+    toc: baseToc,
+  },
+  {
+    slug: "accordion",
+    title: "Accordion",
+    description: "Collapsible content sections for FAQs and grouped settings.",
+    importSnippet: `import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Accordion type="single" collapsible>
+  <AccordionItem value="q1">
+    <AccordionTrigger>What is the settlement cycle?</AccordionTrigger>
+    <AccordionContent>Settlements are processed on T+1 business days.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="q2">
+    <AccordionTrigger>How do I raise a dispute?</AccordionTrigger>
+    <AccordionContent>Navigate to Disputes and click New Dispute.</AccordionContent>
+  </AccordionItem>
+</Accordion>`,
+    toc: baseToc,
+  },
+  {
+    slug: "callout",
+    title: "Callout",
+    description: "Prominent inline message for guidance, tips, and contextual information.",
+    importSnippet: `import { Callout, CalloutTitle, CalloutText } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Callout variant="info">
+  <CalloutTitle>Note</CalloutTitle>
+  <CalloutText>Webhook retries are attempted up to 3 times with exponential backoff.</CalloutText>
+</Callout>
+
+<Callout variant="warning">
+  <CalloutTitle>Action required</CalloutTitle>
+  <CalloutText>Complete your KYC to unlock higher transaction limits.</CalloutText>
+</Callout>`,
+    toc: baseToc,
+  },
+  {
+    slug: "code",
+    title: "Code",
+    description: "Inline code and multi-line code blocks with copy-to-clipboard.",
+    importSnippet: `import { Code, CodeBlock } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `{/* Inline */}
+<p>Pass the <Code>amount</Code> as a number in paise.</p>
+
+{/* Block */}
+<CodeBlock language="json">
+  {JSON.stringify({ status: "SUCCESS", txnId: "TXN123" }, null, 2)}
+</CodeBlock>`,
+    toc: baseToc,
+  },
+  {
+    slug: "command",
+    title: "Command",
+    description: "Command palette with keyboard navigation for search and quick actions.",
+    importSnippet: `import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandGroup,
+  CommandItem,
+} from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Command className="rounded-xl border border-border shadow-md">
+  <CommandInput placeholder="Search components..." />
+  <CommandList>
+    <CommandGroup heading="Components">
+      <CommandItem>Button</CommandItem>
+      <CommandItem>Card</CommandItem>
+      <CommandItem>Dialog</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>`,
     toc: baseToc,
   },
 ];

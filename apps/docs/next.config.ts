@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const monorepoRoot = path.resolve(process.cwd(), "../..");
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@payglocal_flux/ui"],
+  transpilePackages: ["@deepankarraj/flux-ui"],
   outputFileTracingRoot: monorepoRoot,
 };
 

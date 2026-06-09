@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
   Stack,
-} from "@payglocal_flux/ui";
+} from "@deepankarraj/flux-ui";
 
 export function SelectPlayground() {
   return (

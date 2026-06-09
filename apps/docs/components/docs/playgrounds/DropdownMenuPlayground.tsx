@@ -17,7 +17,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@payglocal_flux/ui";
+} from "@deepankarraj/flux-ui";
 
 export function DropdownMenuPlayground() {
   const [bookmarks, setBookmarks] = useState(true);

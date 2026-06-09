@@ -26,7 +26,7 @@
       "@/*": [
         "./*"
       ],
-      "@payglocal_flux/ui": [
+      "@deepankarraj/flux-ui": [
         "../../packages/flux-ui/src/index.ts"
       ]
     }
