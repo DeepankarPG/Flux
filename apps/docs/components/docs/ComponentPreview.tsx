@@ -5,18 +5,108 @@ import {
   AlertCircle,
   ArrowUpRight,
   BarChart3,
+  Bell,
   CheckCircle2,
+  ChevronRight,
   DollarSign,
   ExternalLink,
   FileText,
+  Home,
+  Info,
+  LayoutDashboard,
+  Settings,
+  Star,
+  User,
+  Users,
+  Zap,
 } from "lucide-react";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Alert,
+  AlertDescription,
+  AlertTitle,
   AttentionListTemplate,
   Avatar,
-  Box,
   AvatarFallback,
+  AvatarGroup,
   AvatarImage,
+  AvatarTag,
+  Badge,
+  Blanket,
+  Box,
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
   Button,
+  ButtonGroup,
+  Callout,
+  CalloutIcon,
+  CalloutText,
+  CalloutTitle,
+  Checkbox,
+  Code,
+  CodeBlock,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+  CountrySelect,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+  Flag,
+  FlagGroup,
+  Heading,
+  IconButton,
+  InlineEdit,
+  Label,
+  Link,
+  Lozenge,
+  Menu,
+  MenuDivider,
+  MenuItem,
+  MenuSection,
+  MetricText,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Progress,
+  ProgressIndicator,
+  ProgressTracker,
+  RadioGroup,
+  RadioGroupItem,
+  SectionMessage,
+  SectionMessageActions,
+  SectionMessageContent,
+  SectionMessageTitle,
+  Slider,
+  Spinner,
+  Switch,
+  Tag,
+  TagGroup,
+  Text,
+  TimePicker,
+  VisuallyHidden,
   Card,
   CardContent,
   CardDescription,
@@ -50,12 +140,12 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
+  SplitButton,
   Stack,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-  Textarea,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -86,6 +176,15 @@ const tableData: Row[] = [
 const tableColumns: Column<Row>[] = [
   { key: "name", header: "Merchant", render: (r) => r.name },
 ];
+
+function TimePickerDemo() {
+  const [time, setTime] = useState("");
+  return (
+    <div className="mx-auto w-full max-w-xs">
+      <TimePicker value={time} onValueChange={setTime} placeholder="Select time" />
+    </div>
+  );
+}
 
 function ChartTemplatesDemo() {
   const [dashTab, setDashTab] = useState("gross");
@@ -549,6 +648,441 @@ export function ComponentPreview({ slug }: { slug: string }) {
             ))}
           </div>
         </TooltipProvider>
+      );
+    case "accordion":
+      return (
+        <div className="mx-auto w-full max-w-lg text-left">
+          <Accordion type="single" collapsible defaultValue="item-1">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>What is Flux UI?</AccordionTrigger>
+              <AccordionContent>Flux UI is an open design system built with React, Tailwind CSS v4, and Radix primitives — the same stack used in production.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>How do I install it?</AccordionTrigger>
+              <AccordionContent>Run <Code>npm install @deepankarraj/flux-ui</Code> and follow the Tailwind v4 setup in the Installation guide.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Is dark mode supported?</AccordionTrigger>
+              <AccordionContent>Yes — all components use CSS variables that switch automatically when you add the <Code>.dark</Code> class to your root element.</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      );
+    case "alert":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <Alert variant="info"><AlertTitle>Info</AlertTitle><AlertDescription>Your account has been updated successfully.</AlertDescription></Alert>
+          <Alert variant="success"><AlertTitle>Success</AlertTitle><AlertDescription>Payment processed — transaction ID TXN-2934.</AlertDescription></Alert>
+          <Alert variant="warning" dismissible><AlertTitle>Warning</AlertTitle><AlertDescription>Your API key expires in 3 days. Rotate it now.</AlertDescription></Alert>
+          <Alert variant="error"><AlertTitle>Error</AlertTitle><AlertDescription>Unable to connect to the payment gateway. Please retry.</AlertDescription></Alert>
+        </Stack>
+      );
+    case "badge":
+      return (
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Badge variant="default">Default</Badge>
+          <Badge variant="secondary">Secondary</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="outline">Outline</Badge>
+          <Badge variant="default" size="sm">Small</Badge>
+          <Badge variant="success" size="lg">Large</Badge>
+        </div>
+      );
+    case "breadcrumbs":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-lg text-left">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink href="#">Components</BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbPage>Breadcrumbs</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbEllipsis /></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbLink href="#">Settings</BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem><BreadcrumbPage>Profile</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </Stack>
+      );
+    case "callout":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <Callout variant="info">
+            <CalloutIcon variant="info" />
+            <div><CalloutTitle>Before you begin</CalloutTitle><CalloutText>Make sure your Tailwind config points @source at the flux-ui package src directory.</CalloutText></div>
+          </Callout>
+          <Callout variant="discovery">
+            <CalloutIcon variant="discovery" />
+            <div><CalloutTitle>New in v2</CalloutTitle><CalloutText>MetricText, CountrySelect, and Spotlight are now available in this release.</CalloutText></div>
+          </Callout>
+          <Callout variant="warning">
+            <CalloutIcon variant="warning" />
+            <div><CalloutTitle>Breaking change</CalloutTitle><CalloutText>The package scope changed from @flux/ui to @deepankarraj/flux-ui in v0.2.</CalloutText></div>
+          </Callout>
+        </Stack>
+      );
+    case "checkbox":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-xs text-left">
+          <div className="flex items-center gap-2"><Checkbox id="cb1" defaultChecked /><label htmlFor="cb1" className="text-sm font-medium text-foreground">Checked</label></div>
+          <div className="flex items-center gap-2"><Checkbox id="cb2" /><label htmlFor="cb2" className="text-sm font-medium text-foreground">Unchecked</label></div>
+          <div className="flex items-center gap-2"><Checkbox id="cb3" disabled defaultChecked /><label htmlFor="cb3" className="text-sm font-medium text-muted-foreground">Disabled checked</label></div>
+          <div className="flex items-center gap-2"><Checkbox id="cb4" size="lg" /><label htmlFor="cb4" className="text-sm font-medium text-foreground">Large</label></div>
+        </Stack>
+      );
+    case "code":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <p className="text-sm text-muted-foreground">Import the component using <Code>@deepankarraj/flux-ui</Code> and wrap with <Code>TooltipProvider</Code>.</p>
+          <CodeBlock language="tsx" filename="example.tsx" code={`import { Button } from "@deepankarraj/flux-ui";
+
+export function MyPage() {
+  return <Button variant="primary">Get started</Button>;
+}`} />
+        </Stack>
+      );
+    case "command":
+      return (
+        <div className="mx-auto w-full max-w-sm">
+          <Command>
+            <CommandInput placeholder="Search components..." />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup heading="Components">
+                <CommandItem onSelect={() => {}}><Zap className="size-4 text-muted-foreground" />Button<CommandShortcut>⌘B</CommandShortcut></CommandItem>
+                <CommandItem onSelect={() => {}}><Star className="size-4 text-muted-foreground" />Card</CommandItem>
+                <CommandItem onSelect={() => {}}><Users className="size-4 text-muted-foreground" />Avatar</CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup heading="Navigation">
+                <CommandItem onSelect={() => {}}><Home className="size-4 text-muted-foreground" />Breadcrumbs</CommandItem>
+                <CommandItem onSelect={() => {}}><LayoutDashboard className="size-4 text-muted-foreground" />Tabs</CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </div>
+      );
+    case "country-select":
+      return (
+        <div className="mx-auto w-full max-w-xs">
+          <CountrySelect placeholder="Select country" showDialCode />
+        </div>
+      );
+    case "drawer":
+      return (
+        <div className="flex flex-wrap justify-center gap-3">
+          {(["right", "bottom", "left"] as const).map((side) => (
+            <Drawer key={side} side={side}>
+              <DrawerTrigger asChild>
+                <Button variant="outline" size="md" className="capitalize">{side}</Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader>
+                  <DrawerTitle>Drawer — {side}</DrawerTitle>
+                  <DrawerDescription>This drawer slides in from the {side}.</DrawerDescription>
+                </DrawerHeader>
+                <div className="flex-1 px-6 py-4">
+                  <p className="text-sm text-muted-foreground">Add your content here — forms, details, or secondary actions.</p>
+                </div>
+                <DrawerFooter>
+                  <DrawerClose asChild><Button variant="ghost" size="md">Cancel</Button></DrawerClose>
+                  <Button variant="primary" size="md">Save</Button>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          ))}
+        </div>
+      );
+    case "flag":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-sm">
+          {(["info", "success", "warning", "error"] as const).map((v) => (
+            <Flag key={v} id={v} variant={v} title={`${v.charAt(0).toUpperCase() + v.slice(1)} notification`} description="This flag auto-dismisses after 8 seconds." />
+          ))}
+        </Stack>
+      );
+    case "heading":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <Heading level={1} size="3xl">Heading 1 — Display</Heading>
+          <Heading level={2} size="2xl">Heading 2 — Page title</Heading>
+          <Heading level={3} size="xl">Heading 3 — Section</Heading>
+          <Heading level={4} size="lg">Heading 4 — Subsection</Heading>
+          <Text size="md">Body text — regular paragraph copy used throughout the UI.</Text>
+          <Text size="sm" color="subtle">Subtle body text — used for descriptions and secondary content.</Text>
+          <MetricText size="xl" trend="up" prefix="$">1,24,320</MetricText>
+        </Stack>
+      );
+    case "icon-button":
+      return (
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <IconButton aria-label="Settings" variant="primary"><Settings className="size-4" /></IconButton>
+          <IconButton aria-label="User" variant="secondary"><User className="size-4" /></IconButton>
+          <IconButton aria-label="Bell" variant="outline"><Bell className="size-4" /></IconButton>
+          <IconButton aria-label="Ghost" variant="ghost"><Star className="size-4" /></IconButton>
+          <IconButton aria-label="Small" variant="outline" size="sm"><Settings className="size-3.5" /></IconButton>
+          <IconButton aria-label="Large" variant="primary" size="lg"><Zap className="size-5" /></IconButton>
+          <IconButton aria-label="Loading" variant="primary" isLoading><Settings className="size-4" /></IconButton>
+        </div>
+      );
+    case "button-group":
+      return (
+        <Stack gap="lg" className="items-center">
+          <ButtonGroup>
+            <Button variant="outline" size="md">Day</Button>
+            <Button variant="outline" size="md">Week</Button>
+            <Button variant="primary" size="md">Month</Button>
+            <Button variant="outline" size="md">Year</Button>
+          </ButtonGroup>
+          <SplitButton label="Publish" variant="primary" onClick={() => {}} size="md">
+            <div className="py-1">
+              <button className="w-full px-3 py-2 text-left text-sm hover:bg-muted transition-colors">Save as draft</button>
+              <button className="w-full px-3 py-2 text-left text-sm hover:bg-muted transition-colors">Schedule</button>
+            </div>
+          </SplitButton>
+        </Stack>
+      );
+    case "inline-edit":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-sm text-left">
+          <div>
+            <p className="mb-2 text-xs font-medium text-muted-foreground">Click to edit</p>
+            <InlineEdit value="Acme Corporation" onConfirm={() => {}} />
+          </div>
+          <div>
+            <p className="mb-2 text-xs font-medium text-muted-foreground">Multiline</p>
+            <InlineEdit value="Click here to edit this longer description text inline." onConfirm={() => {}} multiline />
+          </div>
+        </Stack>
+      );
+    case "lozenge":
+      return (
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Lozenge>Default</Lozenge>
+          <Lozenge variant="inprogress">In Progress</Lozenge>
+          <Lozenge variant="success">Done</Lozenge>
+          <Lozenge variant="moved">Moved</Lozenge>
+          <Lozenge variant="new">New</Lozenge>
+          <Lozenge variant="removed">Removed</Lozenge>
+        </div>
+      );
+    case "menu":
+      return (
+        <div className="mx-auto w-64 rounded-xl border border-border bg-card shadow-sm p-2">
+          <Menu>
+            <MenuSection label="Account">
+              <MenuItem icon={<User className="size-4" />} isSelected>Profile</MenuItem>
+              <MenuItem icon={<Settings className="size-4" />}>Settings</MenuItem>
+            </MenuSection>
+            <MenuDivider />
+            <MenuSection label="Navigate">
+              <MenuItem icon={<LayoutDashboard className="size-4" />} href="#">Dashboard</MenuItem>
+              <MenuItem icon={<BarChart3 className="size-4" />} href="#">Analytics</MenuItem>
+            </MenuSection>
+            <MenuDivider />
+            <MenuItem isDanger>Sign out</MenuItem>
+          </Menu>
+        </div>
+      );
+    case "pagination":
+      return (
+        <Stack gap="lg" className="items-center">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+              <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+              <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
+              <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
+              <PaginationItem><PaginationEllipsis /></PaginationItem>
+              <PaginationItem><PaginationLink href="#">10</PaginationLink></PaginationItem>
+              <PaginationItem><PaginationNext href="#" /></PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </Stack>
+      );
+    case "progress":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-sm text-left">
+          <div><p className="mb-2 text-xs font-medium text-muted-foreground">Default 65%</p><Progress value={65} label /></div>
+          <div><p className="mb-2 text-xs font-medium text-muted-foreground">Success</p><Progress value={100} variant="success" label /></div>
+          <div><p className="mb-2 text-xs font-medium text-muted-foreground">Warning</p><Progress value={40} variant="warning" /></div>
+          <div>
+            <p className="mb-3 text-xs font-medium text-muted-foreground">Step tracker</p>
+            <ProgressTracker steps={[
+              { label: "Account", status: "complete" },
+              { label: "Details", status: "current" },
+              { label: "Payment", status: "upcoming" },
+              { label: "Confirm", status: "upcoming" },
+            ]} />
+          </div>
+        </Stack>
+      );
+    case "progress-indicator":
+      return (
+        <Stack gap="lg" className="items-center">
+          <ProgressIndicator selectedIndex={1} values={["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]} />
+          <ProgressIndicator selectedIndex={2} values={["A", "B", "C"]} size="lg" />
+        </Stack>
+      );
+    case "radio":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-xs text-left">
+          <RadioGroup defaultValue="card">
+            <div className="flex items-center gap-2"><RadioGroupItem value="card" id="r1" /><Label htmlFor="r1">Card payment</Label></div>
+            <div className="flex items-center gap-2"><RadioGroupItem value="bank" id="r2" /><Label htmlFor="r2">Bank transfer</Label></div>
+            <div className="flex items-center gap-2"><RadioGroupItem value="upi" id="r3" /><Label htmlFor="r3">UPI</Label></div>
+            <div className="flex items-center gap-2"><RadioGroupItem value="wallet" id="r4" disabled /><Label htmlFor="r4" className="text-muted-foreground">Wallet (unavailable)</Label></div>
+          </RadioGroup>
+        </Stack>
+      );
+    case "section-message":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <SectionMessage variant="info">
+            <SectionMessageTitle>Verification required</SectionMessageTitle>
+            <SectionMessageContent>Complete KYC verification to enable higher transaction limits on your account.</SectionMessageContent>
+            <SectionMessageActions><Button size="sm" variant="primary">Verify now</Button><Button size="sm" variant="ghost">Later</Button></SectionMessageActions>
+          </SectionMessage>
+          <SectionMessage variant="warning">
+            <SectionMessageTitle>Scheduled maintenance</SectionMessageTitle>
+            <SectionMessageContent>The payment gateway will be unavailable on Sunday 2 AM – 4 AM IST for routine maintenance.</SectionMessageContent>
+          </SectionMessage>
+        </Stack>
+      );
+    case "slider":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-sm text-left">
+          <div><p className="mb-3 text-xs font-medium text-muted-foreground">Default</p><Slider defaultValue={[40]} max={100} step={1} /></div>
+          <div><p className="mb-3 text-xs font-medium text-muted-foreground">Range</p><Slider defaultValue={[20, 80]} max={100} step={5} /></div>
+          <div><p className="mb-3 text-xs font-medium text-muted-foreground">Disabled</p><Slider defaultValue={[60]} disabled /></div>
+        </Stack>
+      );
+    case "spinner":
+      return (
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          <Spinner size="xs" /><Spinner size="sm" /><Spinner size="md" /><Spinner size="lg" /><Spinner size="xl" />
+          <Spinner size="md" color="muted" />
+          <div className="rounded-lg bg-primary px-4 py-2"><Spinner size="md" color="white" /></div>
+        </div>
+      );
+    case "switch":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-xs text-left">
+          <div className="flex items-center justify-between"><Label>Notifications</Label><Switch defaultChecked /></div>
+          <div className="flex items-center justify-between"><Label>Dark mode</Label><Switch /></div>
+          <div className="flex items-center justify-between"><Label className="text-muted-foreground">Disabled</Label><Switch disabled defaultChecked /></div>
+          <div className="flex items-center gap-3"><Switch size="sm" /><Switch size="md" defaultChecked /><Switch size="lg" /></div>
+        </Stack>
+      );
+    case "tag":
+      return (
+        <Stack gap="lg" className="mx-auto w-full max-w-sm items-center">
+          <div className="flex flex-wrap gap-2 justify-center">
+            <Tag>Default</Tag>
+            <Tag colorScheme="blue">Blue</Tag>
+            <Tag colorScheme="green">Green</Tag>
+            <Tag colorScheme="amber">Amber</Tag>
+            <Tag colorScheme="red">Red</Tag>
+            <Tag colorScheme="purple">Purple</Tag>
+          </div>
+          <TagGroup>
+            <Tag colorScheme="blue" onRemove={() => {}}>React</Tag>
+            <Tag colorScheme="green" onRemove={() => {}}>TypeScript</Tag>
+            <Tag colorScheme="purple" onRemove={() => {}}>Tailwind</Tag>
+          </TagGroup>
+        </Stack>
+      );
+    case "time-picker":
+      return <TimePickerDemo />;
+    case "link":
+      return (
+        <Stack gap="md" className="items-center">
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="#">Default link</Link>
+            <Link href="#" variant="subtle">Subtle link</Link>
+            <Link href="#" variant="nav">Nav link</Link>
+          </div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="#" size="sm">Small</Link>
+            <Link href="#" size="md">Medium</Link>
+            <Link href="#" size="lg">Large</Link>
+          </div>
+        </Stack>
+      );
+    case "avatar-group":
+      return (
+        <Stack gap="lg" className="items-center">
+          <AvatarGroup avatars={[
+            { fallback: "JD" }, { fallback: "AK" }, { fallback: "MR" },
+            { fallback: "SP" }, { fallback: "LT" }, { fallback: "BG" },
+          ]} max={4} />
+          <AvatarGroup avatars={[{ fallback: "AB" }, { fallback: "CD" }, { fallback: "EF" }]} size="lg" />
+        </Stack>
+      );
+    case "visually-hidden":
+      return (
+        <Stack gap="md" className="items-center text-sm text-muted-foreground">
+          <p>The button below has a visually hidden label for screen readers:</p>
+          <button className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-border bg-card hover:bg-muted transition-colors">
+            <Settings className="size-4" aria-hidden />
+            <VisuallyHidden>Open settings</VisuallyHidden>
+          </button>
+          <p className="text-xs">Screen readers announce: &ldquo;Open settings, button&rdquo;</p>
+        </Stack>
+      );
+    case "blanket":
+      return (
+        <div className="flex justify-center">
+          <Button variant="outline" size="lg" onClick={() => toast.success("Blanket shown — click outside to dismiss (simulated here)")}>
+            Show blanket
+          </Button>
+        </div>
+      );
+    case "spotlight":
+      return (
+        <div className="mx-auto w-72">
+          <div className="bg-card border border-border rounded-xl shadow-xl p-5">
+            <h3 className="font-semibold text-base text-foreground">Welcome to Flux UI</h3>
+            <p className="mt-1 text-sm text-muted-foreground leading-relaxed">This is a Spotlight card — used for guided onboarding flows and feature announcements.</p>
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">1 of 3</span>
+                <div className="flex gap-1">
+                  {[0,1,2].map((i) => <span key={i} className={`rounded-full transition-all ${i===0?"w-4 h-1.5 bg-primary":"w-1.5 h-1.5 bg-muted-foreground/30"}`} />)}
+                </div>
+              </div>
+              <Button size="sm" variant="primary">Next <ChevronRight className="size-3 ml-1" /></Button>
+            </div>
+          </div>
+        </div>
+      );
+    case "form":
+      return (
+        <div className="mx-auto w-full max-w-sm text-left">
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Email <span className="text-destructive">*</span></label>
+              <input className="flex h-11 w-full rounded-lg border border-border bg-card px-4 py-2 text-[15px] shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring placeholder:text-muted-foreground" placeholder="you@example.com" type="email" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-foreground">Company</label>
+              <input className="flex h-11 w-full rounded-lg border border-border bg-card px-4 py-2 text-[15px] shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring placeholder:text-muted-foreground" placeholder="Acme Corp" />
+              <p className="text-xs text-muted-foreground">Used for invoice and billing.</p>
+            </div>
+            <Button variant="primary" size="md" className="w-full">Submit</Button>
+          </div>
+        </div>
       );
     default:
       return null;
