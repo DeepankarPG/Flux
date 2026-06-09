@@ -4,10 +4,9 @@ import Link from "next/link";
 import { Github, Menu } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { FluxLogo } from "@/components/docs/FluxLogo";
 import { ThemeToggle } from "@/components/docs/ThemeToggle";
 import { getDocsNavSections } from "@/lib/docs-nav";
-import { getGitHubUrl, UI_DOCS_NAME, UI_DOCS_TAGLINE } from "@/lib/site-config";
+import { getGitHubUrl } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function DocsTopBar() {
@@ -42,17 +41,7 @@ export function DocsTopBar() {
           <Menu className="h-4 w-4" aria-hidden />
           <span className="sr-only">Open navigation</span>
         </button>
-        <Link
-          href="/docs"
-          className="flex min-w-0 max-w-[min(100%,28rem)] items-center gap-3 truncate sm:max-w-none"
-        >
-          <FluxLogo size="sm" className="shrink-0" />
-          <span className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-sm font-semibold text-foreground">{UI_DOCS_NAME}</span>
-            <span className="hidden truncate text-xs text-muted-foreground sm:block">{UI_DOCS_TAGLINE}</span>
-          </span>
-        </Link>
-        <nav className="ml-2 hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           <Link href="/docs" className={navLinkClass(docsActive)}>
             Docs
           </Link>

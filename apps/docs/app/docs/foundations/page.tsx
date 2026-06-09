@@ -62,7 +62,7 @@ export default function FoundationsIndexPage() {
     {
       href: "/docs/components",
       title: "Live components",
-      description: "Interactive previews with controls — that is the "playground" experience.",
+      description: 'Interactive previews with controls — that is the "playground" experience.',
       icon: Boxes,
     },
   ];

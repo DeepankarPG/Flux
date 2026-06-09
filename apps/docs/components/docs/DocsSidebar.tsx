@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getDocsNavSections } from "@/lib/docs-nav";
-import { UI_DOCS_NAME } from "@/lib/site-config";
+import { FluxLogo } from "@/components/docs/FluxLogo";
 import { cn } from "@/lib/utils";
 
 export function DocsSidebar() {
@@ -13,10 +13,9 @@ export function DocsSidebar() {
   return (
     <aside className="hidden w-[15.5rem] shrink-0 border-r border-border bg-card lg:block">
       <div className="sticky top-0 flex h-dvh flex-col gap-6 overflow-y-auto px-4 py-6">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Docs</p>
-          <p className="mt-1 text-sm font-semibold text-foreground">{UI_DOCS_NAME}</p>
-        </div>
+        <Link href="/docs" className="flex items-center gap-2.5">
+          <FluxLogo size="sm" />
+        </Link>
         <nav className="flex flex-col gap-6" aria-label="Documentation">
           {sections.map((section) => (
             <div key={section.label}>
