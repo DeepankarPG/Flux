@@ -9,9 +9,13 @@ export type { GridProps, GridCols, GridFlow, ResponsiveCols, FlexProps, FlexDire
 // Button
 export { Button } from "./button";
 export type { ButtonProps } from "./button";
+export { ButtonGroup, SplitButton, SplitButtonItem } from "./button-group";
+export type { ButtonGroupProps, SplitButtonProps, SplitButtonItemProps } from "./button-group";
 
 // Inputs
 export { Input } from "./input";
+export { CheckboxSelect } from "./checkbox-select";
+export type { CheckboxSelectProps, CheckboxSelectOption } from "./checkbox-select";
 export { Textarea } from "./textarea";
 export { Label } from "./label";
 export { Checkbox } from "./checkbox";
@@ -22,6 +26,29 @@ export { Switch } from "./switch";
 export type { SwitchProps } from "./switch";
 export { Slider } from "./slider";
 export type { SliderProps } from "./slider";
+
+// Form (validation wrapper)
+export {
+  Form,
+  FormField,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormError,
+  FormItem,
+  useForm,
+} from "./form";
+export type {
+  FormProps,
+  FormFieldProps,
+  FormValues,
+  FormErrors,
+  FieldConfig,
+  FieldsConfig,
+  RegisterResult,
+  UseFormReturn,
+  ValidatorRule,
+} from "./form";
 
 // Form fields
 export {
@@ -50,6 +77,16 @@ export { CurrencyAmountInput } from "./currency-amount-input";
 export { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card";
 export { Separator } from "./separator";
 export { ScrollArea, ScrollBar } from "./scroll-area";
+
+// SideNav
+export {
+  SideNav,
+  SideNavHeader,
+  SideNavSection,
+  SideNavItem,
+  SideNavFooter,
+} from "./side-nav";
+export type { SideNavProps, SideNavItemProps } from "./side-nav";
 
 // Navigation
 export {
@@ -85,12 +122,18 @@ export type { LinkProps } from "./link";
 // Labels & Badges
 export { Badge } from "./badge";
 export type { BadgeProps } from "./badge";
+export { Lozenge } from "./lozenge";
+export type { LozengeProps } from "./lozenge";
 export { Tag, TagGroup } from "./tag";
 export type { TagProps, TagGroupProps } from "./tag";
 export { StatusBadge, STATUS_BADGE_KEYS } from "./status-badge";
 export type { StatusBadgeMeta } from "./status-badge";
 
 // Overlays
+export { Blanket } from "./blanket";
+export type { BlanketProps } from "./blanket";
+export { Spotlight, SpotlightCard, useSpotlight } from "./spotlight";
+export type { SpotlightProps, SpotlightCardProps, SpotlightStep, UseSpotlightReturn } from "./spotlight";
 export {
   Dialog,
   DialogTrigger,
@@ -112,6 +155,10 @@ export {
 } from "./drawer";
 export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "./popover";
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./tooltip";
+
+// Menu (standalone vertical)
+export { Menu, MenuSection, MenuItem, MenuDivider } from "./menu";
+export type { MenuProps, MenuSectionProps, MenuItemProps } from "./menu";
 
 // Menus & Select
 export {
@@ -164,6 +211,13 @@ export { Alert, AlertTitle, AlertDescription, Banner } from "./alert";
 export type { AlertProps, BannerProps } from "./alert";
 export { Callout, CalloutIcon, CalloutTitle, CalloutText } from "./callout";
 export type { CalloutProps, CalloutVariant } from "./callout";
+export {
+  SectionMessage,
+  SectionMessageTitle,
+  SectionMessageContent,
+  SectionMessageActions,
+} from "./section-message";
+export type { SectionMessageProps, SectionMessageVariant } from "./section-message";
 export { Spinner } from "./spinner";
 export type { SpinnerProps } from "./spinner";
 export { Progress, ProgressTracker } from "./progress";
@@ -184,6 +238,8 @@ export type { CodeProps, CodeBlockProps } from "./code";
 export { Avatar, AvatarImage, AvatarFallback } from "./avatar";
 export { AvatarGroup } from "./avatar-group";
 export type { AvatarGroupProps, AvatarGroupItem } from "./avatar-group";
+export { AvatarTag } from "./avatar-tag";
+export type { AvatarTagProps, AvatarTagSize } from "./avatar-tag";
 
 // Date & Calendar
 export { Calendar, CalendarDayButton } from "./calendar";
@@ -230,3 +286,43 @@ export type {
 
 // Toast
 export { Toaster, toast } from "./sonner";
+
+// Inline Edit
+export { InlineEdit } from "./inline-edit";
+export type { InlineEditProps } from "./inline-edit";
+
+// Inline Dialog
+export { InlineDialog, InlineDialogTrigger, InlineDialogContent } from "./inline-dialog";
+export type { InlineDialogProps, InlineDialogContentProps } from "./inline-dialog";
+
+// Flag notifications
+export { Flag, FlagGroup, useFlagGroup } from "./flag";
+export type { FlagProps, FlagGroupProps, FlagVariant, FlagAction, FlagGroupPosition, UseFlagGroupReturn } from "./flag";
+
+// Responsive Show/Hide
+export { Show, Hide, useBreakpoint } from "./responsive";
+export type { ShowProps, HideProps, Breakpoint, UseBreakpointReturn } from "./responsive";
+
+// Country Select
+export { CountrySelect, COUNTRIES } from "./country-select";
+export type { CountrySelectProps, Country } from "./country-select";
+
+// Button variants
+export { IconButton } from "./icon-button";
+export type { IconButtonProps } from "./icon-button";
+
+// Inputs
+export { TimePicker } from "./time-picker";
+export type { TimePickerProps } from "./time-picker";
+
+// Typography
+export { Heading, Text, MetricText } from "./heading";
+export type { HeadingProps, TextProps, MetricTextProps } from "./heading";
+
+// Status
+export { ProgressIndicator } from "./progress-indicator";
+export type { ProgressIndicatorProps } from "./progress-indicator";
+
+// Utility
+export { VisuallyHidden } from "./visually-hidden";
+export type { VisuallyHiddenProps } from "./visually-hidden";

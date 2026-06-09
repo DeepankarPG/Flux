@@ -699,6 +699,231 @@ toast.success("Saved");`,
 </Command>`,
     toc: baseToc,
   },
+  {
+    slug: "icon-button",
+    title: "Icon button",
+    description: "Square icon-only button with variants, sizes, and required aria-label.",
+    importSnippet: `import { IconButton } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<IconButton aria-label="Close" icon={<XIcon />} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "button-group",
+    title: "Button group",
+    description: "Connected row of buttons sharing borders. Also includes SplitButton.",
+    importSnippet: `import { ButtonGroup, SplitButton } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<ButtonGroup>
+  <Button>Left</Button>
+  <Button>Center</Button>
+  <Button>Right</Button>
+</ButtonGroup>`,
+    toc: baseToc,
+  },
+  {
+    slug: "time-picker",
+    title: "Time picker",
+    description: "Popover time selector with 12/24h format and scrollable hour/minute columns.",
+    importSnippet: `import { TimePicker } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [time, setTime] = useState("");
+
+<TimePicker value={time} onChange={setTime} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "form",
+    title: "Form",
+    description: "Lightweight form validation wrapper with useForm hook, field errors, and accessible labels.",
+    importSnippet: `import { Form, useForm } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const form = useForm({ defaultValues: { email: "" } });
+
+<Form form={form} onSubmit={(values) => console.log(values)}>
+  <Input {...form.register("email")} />
+</Form>`,
+    toc: baseToc,
+  },
+  {
+    slug: "inline-edit",
+    title: "Inline edit",
+    description: "Click-to-edit text component for in-place editing of values.",
+    importSnippet: `import { InlineEdit } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [value, setValue] = useState("Click to edit");
+
+<InlineEdit value={value} onChange={setValue} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "lozenge",
+    title: "Lozenge",
+    description: "Compact bold uppercase status chip for workflow states.",
+    importSnippet: `import { Lozenge } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Lozenge appearance="success">Approved</Lozenge>
+<Lozenge appearance="removed">Rejected</Lozenge>`,
+    toc: baseToc,
+  },
+  {
+    slug: "section-message",
+    title: "Section message",
+    description: "Full-width prominent message block with colored border accent and action slots.",
+    importSnippet: `import { SectionMessage } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<SectionMessage
+  appearance="warning"
+  title="KYC incomplete"
+  actions={<Button size="sm">Complete KYC</Button>}
+>
+  Verify your details to unlock higher limits.
+</SectionMessage>`,
+    toc: baseToc,
+  },
+  {
+    slug: "flag",
+    title: "Flag",
+    description: "Auto-dismissable floating notification with progress bar and useFlagGroup hook.",
+    importSnippet: `import { Flag, useFlagGroup } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const { addFlag } = useFlagGroup();
+
+addFlag({ title: "Payment successful", appearance: "success" });`,
+    toc: baseToc,
+  },
+  {
+    slug: "heading",
+    title: "Heading",
+    description: "Typed h1–h6 heading component with size/color variants.",
+    importSnippet: `import { Heading } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Heading as="h1" size="xl">Dashboard</Heading>
+<Heading as="h2" size="lg" color="subtle">Overview</Heading>`,
+    toc: baseToc,
+  },
+  {
+    slug: "text",
+    title: "Text",
+    description: "Semantic text and MetricText primitives with size, weight, and color variants.",
+    importSnippet: `import { Text, MetricText } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Text size="sm" color="subtle">Last updated 2 hours ago.</Text>
+<MetricText size="xl">₹9,42,800</MetricText>`,
+    toc: baseToc,
+  },
+  {
+    slug: "visually-hidden",
+    title: "Visually hidden",
+    description: "Screen-reader-only wrapper; optionally visible on focus for skip links.",
+    importSnippet: `import { VisuallyHidden } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<VisuallyHidden>Skip to main content</VisuallyHidden>`,
+    toc: baseToc,
+  },
+  {
+    slug: "blanket",
+    title: "Blanket",
+    description: "Full-screen overlay backdrop for modals and custom layered UI.",
+    importSnippet: `import { Blanket } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Blanket isTinted onBlanketClicked={() => setOpen(false)} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "inline-dialog",
+    title: "Inline dialog",
+    description: "Small anchored floating dialog with arrow pointer toward the trigger.",
+    importSnippet: `import { InlineDialog } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<InlineDialog isOpen={open} onClose={() => setOpen(false)} placement="bottom-start">
+  <p>Quick confirmation message.</p>
+</InlineDialog>`,
+    toc: baseToc,
+  },
+  {
+    slug: "spotlight",
+    title: "Spotlight",
+    description: "Guided onboarding overlay with step cards, dot indicators, and useSpotlight hook.",
+    importSnippet: `import { SpotlightManager, SpotlightTarget, useSpotlight } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<SpotlightManager>
+  <SpotlightTarget name="export-button">
+    <Button>Export</Button>
+  </SpotlightTarget>
+</SpotlightManager>`,
+    toc: baseToc,
+  },
+  {
+    slug: "menu",
+    title: "Menu",
+    description: "Standalone vertical navigation menu with sections, items, and danger states.",
+    importSnippet: `import { Menu, MenuSection, MenuItem } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Menu>
+  <MenuSection title="Account">
+    <MenuItem>Profile</MenuItem>
+    <MenuItem isDanger>Delete account</MenuItem>
+  </MenuSection>
+</Menu>`,
+    toc: baseToc,
+  },
+  {
+    slug: "side-nav",
+    title: "Side nav",
+    description: "Collapsible sidebar navigation with header, sections, and footer slots.",
+    importSnippet: `import { SideNav, SideNavSection, SideNavItem } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<SideNav header={<Logo />} footer={<UserMenu />}>
+  <SideNavSection title="Payments">
+    <SideNavItem href="/transactions">Transactions</SideNavItem>
+    <SideNavItem href="/disputes">Disputes</SideNavItem>
+  </SideNavSection>
+</SideNav>`,
+    toc: baseToc,
+  },
+  {
+    slug: "progress-indicator",
+    title: "Progress indicator",
+    description: "Dot-based step/page indicator with animated active pill.",
+    importSnippet: `import { ProgressIndicator } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<ProgressIndicator steps={4} selectedIndex={1} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "responsive",
+    title: "Responsive",
+    description: "Show/Hide components and useBreakpoint hook for responsive layouts.",
+    importSnippet: `import { Show, Hide, useBreakpoint } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Show above="md">
+  <DesktopSidebar />
+</Show>
+<Hide above="md">
+  <MobileDrawer />
+</Hide>`,
+    toc: baseToc,
+  },
+  {
+    slug: "checkbox-select",
+    title: "Checkbox select",
+    description: "Multi-select dropdown with checkboxes, search, and select-all.",
+    importSnippet: `import { CheckboxSelect } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [selected, setSelected] = useState<string[]>([]);
+
+<CheckboxSelect
+  options={[{ label: "Card", value: "card" }, { label: "UPI", value: "upi" }]}
+  value={selected}
+  onChange={setSelected}
+  placeholder="Select methods"
+/>`,
+    toc: baseToc,
+  },
+  {
+    slug: "country-select",
+    title: "Country select",
+    description: "Select with flag emoji, country name, and dial code.",
+    importSnippet: `import { CountrySelect } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [country, setCountry] = useState("IN");
+
+<CountrySelect value={country} onChange={setCountry} />`,
+    toc: baseToc,
+  },
+  {
+    slug: "avatar-tag",
+    title: "Avatar tag",
+    description: "Compact tag chip combining an avatar with a label and optional remove button.",
+    importSnippet: `import { AvatarTag } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<AvatarTag
+  src="/avatar.png"
+  label="Deepankar Raj"
+  onRemove={() => {}}
+/>`,
+    toc: baseToc,
+  },
 ];
 
 export const COMPONENT_BY_SLUG = Object.fromEntries(COMPONENT_DOC_PAGES.map((p) => [p.slug, p]));
