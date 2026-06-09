@@ -1,0 +1,31 @@
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+
+const sizeClass = {
+  sm: "h-6 sm:h-7",
+  md: "h-7 sm:h-8",
+  lg: "h-9 sm:h-10",
+} as const;
+
+type FluxLogoProps = {
+  className?: string;
+  size?: keyof typeof sizeClass;
+  priority?: boolean;
+};
+
+export function FluxLogo({ className, size = "md", priority }: FluxLogoProps) {
+  return (
+    <Image
+      src="/flux-logo.png"
+      alt="Flux"
+      width={274}
+      height={48}
+      className={cn("w-auto shrink-0 object-contain object-left", sizeClass[size], className)}
+      priority={priority}
+      sizes="(max-width: 640px) 160px, 200px"
+    />
+  );
+}
+
+/** @deprecated Use FluxLogo instead */
+export { FluxLogo as PayGlocalLogo };
