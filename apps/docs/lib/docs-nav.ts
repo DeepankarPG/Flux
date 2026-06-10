@@ -30,6 +30,7 @@ export function getDocsNavSections(): DocsNavSection[] {
         { title: "Color palette", href: "/docs/foundations/color" },
         { title: "Typography", href: "/docs/foundations/typography" },
         { title: "Spacing", href: "/docs/foundations/spacing" },
+        { title: "Grid", href: "/docs/foundations/grid" },
         { title: "Motion", href: "/docs/foundations/motion" },
         { title: "Content", href: "/docs/content" },
       ],
