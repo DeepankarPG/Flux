@@ -36,6 +36,17 @@ import {
   AvatarTag,
   Badge,
   Blanket,
+  CheckboxSelect,
+  Hide,
+  InlineDialog,
+  InlineDialogContent,
+  InlineDialogTrigger,
+  Show,
+  SideNav,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavItem,
+  SideNavSection,
   Box,
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -1083,6 +1094,104 @@ export function MyPage() {
             <Button variant="primary" size="md" className="w-full">Submit</Button>
           </div>
         </div>
+      );
+    case "avatar-tag":
+      return (
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <AvatarTag label="Jane Doe" />
+          <AvatarTag label="Arjun Kumar" onRemove={() => {}} />
+          <AvatarTag label="Maria R." size="lg" onRemove={() => {}} />
+          <AvatarTag label="Sam P." size="sm" disabled />
+        </div>
+      );
+    case "checkbox-select":
+      return (
+        <div className="mx-auto w-full max-w-xs">
+          <CheckboxSelect
+            options={[
+              { value: "react", label: "React" },
+              { value: "vue", label: "Vue" },
+              { value: "angular", label: "Angular" },
+              { value: "svelte", label: "Svelte" },
+              { value: "solid", label: "Solid" },
+            ]}
+            value={["react", "svelte"]}
+            onChange={() => {}}
+            placeholder="Select frameworks"
+            showSearch
+          />
+        </div>
+      );
+    case "inline-dialog":
+      return (
+        <div className="flex items-center justify-center">
+          <InlineDialog>
+            <InlineDialogTrigger asChild>
+              <Button variant="outline" size="md">Open inline dialog</Button>
+            </InlineDialogTrigger>
+            <InlineDialogContent>
+              <p className="text-sm font-semibold text-foreground mb-1">Need help?</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">This is an inline dialog — a compact floating panel anchored to its trigger. No backdrop, no blocking.</p>
+            </InlineDialogContent>
+          </InlineDialog>
+        </div>
+      );
+    case "side-nav":
+      return (
+        <div className="mx-auto overflow-hidden rounded-xl border border-border shadow-sm" style={{ height: 360 }}>
+          <SideNav className="h-full">
+            <SideNavHeader>
+              <span className="text-sm font-semibold text-foreground">Flux App</span>
+            </SideNavHeader>
+            <SideNavSection label="Main">
+              <SideNavItem icon={<LayoutDashboard className="size-4" />} label="Dashboard" isActive />
+              <SideNavItem icon={<BarChart3 className="size-4" />} label="Analytics" />
+              <SideNavItem icon={<Users className="size-4" />} label="Users" />
+            </SideNavSection>
+            <SideNavSection label="Settings">
+              <SideNavItem icon={<Settings className="size-4" />} label="Settings" />
+            </SideNavSection>
+            <SideNavFooter>
+              <SideNavItem icon={<User className="size-4" />} label="Profile" />
+            </SideNavFooter>
+          </SideNav>
+        </div>
+      );
+    case "text":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <Text size="lg" weight="semibold">Large semibold text</Text>
+          <Text size="md">Medium body — used for main content and descriptions across dashboard pages.</Text>
+          <Text size="sm" color="subtle">Small subtle — secondary copy, helper text, and metadata.</Text>
+          <Text size="xs" color="subtle">Extra small — labels, timestamps, and fine print.</Text>
+          <div className="flex flex-wrap gap-4 items-baseline pt-2 border-t border-border">
+            <MetricText size="xl" prefix="$" trend="up">1,24,320</MetricText>
+            <MetricText size="lg" trend="down">-4.2%</MetricText>
+            <MetricText size="md" trend="neutral">892</MetricText>
+          </div>
+        </Stack>
+      );
+    case "responsive":
+      return (
+        <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
+          <div className="rounded-xl border border-border p-4 bg-card">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Resize the window to see changes</p>
+            <Show above="md" className="rounded-lg bg-primary/10 text-primary px-3 py-2 text-sm font-medium">
+              Visible on md and above (≥768px)
+            </Show>
+            <Hide above="md" className="rounded-lg bg-amber-500/10 text-amber-700 px-3 py-2 text-sm font-medium">
+              Visible below md (&lt;768px)
+            </Hide>
+          </div>
+          <div className="rounded-xl border border-border p-4 bg-card">
+            <Show above="lg" className="rounded-lg bg-green-500/10 text-green-700 px-3 py-2 text-sm font-medium">
+              Desktop only (≥1024px)
+            </Show>
+            <Hide above="lg" className="rounded-lg bg-purple-500/10 text-purple-700 px-3 py-2 text-sm font-medium">
+              Mobile / tablet (&lt;1024px)
+            </Hide>
+          </div>
+        </Stack>
       );
     default:
       return null;
