@@ -26,9 +26,12 @@ export function getDocsNavSections(): DocsNavSection[] {
       label: "Foundations",
       items: [
         { title: "Overview", href: "/docs/foundations" },
-        { title: "Motion", href: "/docs/foundations/motion" },
+        { title: "Design tokens", href: "/docs/foundations/design-tokens" },
+        { title: "Color palette", href: "/docs/foundations/color" },
         { title: "Typography", href: "/docs/foundations/typography" },
         { title: "Spacing", href: "/docs/foundations/spacing" },
+        { title: "Motion", href: "/docs/foundations/motion" },
+        { title: "Content", href: "/docs/content" },
       ],
     },
     {
