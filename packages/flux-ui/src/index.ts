@@ -130,8 +130,8 @@ export { Lozenge } from "./lozenge";
 export type { LozengeProps } from "./lozenge";
 export { Tag, TagGroup } from "./tag";
 export type { TagProps, TagGroupProps } from "./tag";
-export { StatusBadge, STATUS_BADGE_KEYS } from "./status-badge";
-export type { StatusBadgeMeta } from "./status-badge";
+export { StatusBadge } from "./status-badge";
+export type { StatusBadgeProps, BadgeVariant, BadgeTrailIcon } from "./status-badge";
 
 // Overlays
 export { Blanket } from "./blanket";

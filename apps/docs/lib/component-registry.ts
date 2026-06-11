@@ -411,8 +411,9 @@ toast.success("Saved");`,
     title: "Status badge",
     description: "Workflow states for payments, disputes, and settlements.",
     importSnippet: `import { StatusBadge } from "@deepankarraj/flux-ui";`,
-    usageSnippet: `<StatusBadge status="settled" />
-<StatusBadge status="pending" />`,
+    usageSnippet: `<StatusBadge variant="success" label="Settled" trailIcon="check" />
+<StatusBadge variant="warning" label="Pending" />
+<StatusBadge variant="danger"  label="Failed"  trailIcon="x" />`,
     toc: baseToc,
   },
   {
