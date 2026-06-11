@@ -14,6 +14,10 @@ export type { ButtonGroupProps, SplitButtonProps, SplitButtonItemProps } from ".
 
 // Inputs
 export { Input } from "./input";
+export { PasswordInput } from "./password-input";
+export type { PasswordInputProps } from "./password-input";
+export { OtpInput } from "./otp-input";
+export type { OtpInputProps } from "./otp-input";
 export { CheckboxSelect } from "./checkbox-select";
 export type { CheckboxSelectProps, CheckboxSelectOption } from "./checkbox-select";
 export { Textarea } from "./textarea";

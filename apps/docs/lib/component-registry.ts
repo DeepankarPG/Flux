@@ -264,6 +264,21 @@ const [amount, setAmount] = useState("");
     ],
   },
   {
+    slug: "otp-input",
+    title: "OTP input",
+    description: "Multi-box numeric code entry with auto-advance, backspace navigation, and paste support.",
+    importSnippet: `import { OtpInput } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `const [otp, setOtp] = useState("");
+
+<OtpInput
+  value={otp}
+  onChange={setOtp}
+  length={6}
+  onComplete={(code) => console.log("done", code)}
+/>`,
+    toc: baseToc,
+  },
+  {
     slug: "input-group",
     title: "Input group",
     description: "Addons, icons, and inline actions around inputs and textareas.",
@@ -293,6 +308,15 @@ const [amount, setAmount] = useState("");
     <Button size="sm" variant="outline">Action</Button>
   </Inline>
 </Stack>`,
+    toc: baseToc,
+  },
+  {
+    slug: "password-input",
+    title: "Password input",
+    description: "Secure text field with a show/hide visibility toggle.",
+    importSnippet: `import { PasswordInput } from "@deepankarraj/flux-ui";`,
+    usageSnippet: `<Label htmlFor="pwd">Password</Label>
+<PasswordInput id="pwd" placeholder="Enter your password" />`,
     toc: baseToc,
   },
   {
