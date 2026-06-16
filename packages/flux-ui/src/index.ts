@@ -14,6 +14,10 @@ export type { ButtonGroupProps, SplitButtonProps, SplitButtonItemProps } from ".
 
 // Inputs
 export { Input } from "./input";
+export { PasswordInput } from "./password-input";
+export type { PasswordInputProps } from "./password-input";
+export { OtpInput } from "./otp-input";
+export type { OtpInputProps } from "./otp-input";
 export { CheckboxSelect } from "./checkbox-select";
 export type { CheckboxSelectProps, CheckboxSelectOption } from "./checkbox-select";
 export { Textarea } from "./textarea";
@@ -126,8 +130,8 @@ export { Lozenge } from "./lozenge";
 export type { LozengeProps } from "./lozenge";
 export { Tag, TagGroup } from "./tag";
 export type { TagProps, TagGroupProps } from "./tag";
-export { StatusBadge, STATUS_BADGE_KEYS } from "./status-badge";
-export type { StatusBadgeMeta } from "./status-badge";
+export { StatusBadge } from "./status-badge";
+export type { StatusBadgeProps, BadgeVariant, BadgeTrailIcon } from "./status-badge";
 
 // Overlays
 export { Blanket } from "./blanket";

@@ -172,6 +172,8 @@ import { DropdownMenuPlayground } from "@/components/docs/playgrounds/DropdownMe
 import { FieldPlayground } from "@/components/docs/playgrounds/FieldPlayground";
 import { InputGroupPlayground } from "@/components/docs/playgrounds/InputGroupPlayground";
 import { InputPlayground } from "@/components/docs/playgrounds/InputPlayground";
+import { OtpInputPlayground } from "@/components/docs/playgrounds/OtpInputPlayground";
+import { PasswordInputPlayground } from "@/components/docs/playgrounds/PasswordInputPlayground";
 import { ScrollAreaPlayground } from "@/components/docs/playgrounds/ScrollAreaPlayground";
 import { SelectPlayground } from "@/components/docs/playgrounds/SelectPlayground";
 import { SkeletonPlayground } from "@/components/docs/playgrounds/SkeletonPlayground";
@@ -504,6 +506,10 @@ export function ComponentPreview({ slug }: { slug: string }) {
       return <InputPlayground />;
     case "input-group":
       return <InputGroupPlayground />;
+    case "otp-input":
+      return <OtpInputPlayground />;
+    case "password-input":
+      return <PasswordInputPlayground />;
     case "layout-primitives":
       return (
         <Stack gap="lg" className="w-full max-w-lg text-left">

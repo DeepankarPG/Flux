@@ -32,6 +32,8 @@ export type Column<T> = {
   minWidth?: number;
   maxWidth?: number;
   align?: "left" | "right" | "center";
+  /** Allow cell text to wrap instead of truncating. */
+  wrap?: boolean;
   /** Extra classes on `<th>` / `<td>` (e.g. wider horizontal padding per column) */
   cellClassName?: string;
   render: (row: T, index: number) => ReactNode;
@@ -45,6 +47,12 @@ interface DataTableProps<T> {
   emptyTitle?: string;
   emptyDescription?: string;
   pageSize?: number;
+  /** Controlled page number (1-indexed). Enables server-side pagination. */
+  page?: number;
+  /** Called when the user changes page in controlled mode. */
+  onPageChange?: (page: number) => void;
+  /** Total row count for server-side pagination (overrides data.length for page calculations). */
+  totalRows?: number;
   className?: string;
   rowKey: (row: T) => string;
   /** Optional hover CTA shown on the right of every row */
@@ -74,6 +82,9 @@ export function DataTable<T>({
   emptyTitle = "No data yet",
   emptyDescription,
   pageSize = 10,
+  page: controlledPage,
+  onPageChange,
+  totalRows,
   className,
   rowKey,
   rowCta,
@@ -85,9 +96,16 @@ export function DataTable<T>({
   footerCountLabels = { singular: "item", plural: "items" },
   snug = false,
 }: DataTableProps<T>) {
-  const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(data.length / pageSize);
-  const paginated = data.slice((page - 1) * pageSize, page * pageSize);
+  const isControlled = controlledPage !== undefined;
+  const [internalPage, setInternalPage] = useState(1);
+  const page = isControlled ? controlledPage : internalPage;
+  const setPage = isControlled
+    ? (p: number) => onPageChange?.(p)
+    : (p: number) => setInternalPage(p);
+
+  const total = totalRows ?? data.length;
+  const totalPages = Math.ceil(total / pageSize);
+  const paginated = isControlled ? data : data.slice((page - 1) * pageSize, page * pageSize);
 
   const comfortable = density === "comfortable";
   const compact = density === "compact";
@@ -221,12 +239,12 @@ export function DataTable<T>({
                         comfortable
                           ? cn(
                               "text-[13px] leading-snug",
-                              col.key !== "reason" && "whitespace-nowrap"
+                              !col.wrap && "whitespace-nowrap"
                             )
                           : compact
                             ? cn(
                                 "text-[13px] leading-tight",
-                                col.key !== "reason" && "whitespace-nowrap",
+                                !col.wrap && "whitespace-nowrap",
                                 "overflow-hidden"
                               )
                             : "whitespace-nowrap overflow-hidden",
@@ -277,7 +295,7 @@ export function DataTable<T>({
         </table>
       </div>
 
-      {!isLoading && data.length > 0 && (
+      {!isLoading && paginated.length > 0 && (
         <div
           className={cn(
             "flex items-center gap-4 flex-wrap border-t border-border",
@@ -289,8 +307,8 @@ export function DataTable<T>({
         >
           {footerSummary === "count" ? (
             <span className="text-[12px] text-muted-foreground tabular-nums">
-              <span className="font-medium text-foreground">{data.length}</span>{" "}
-              {data.length === 1
+              <span className="font-medium text-foreground">{total}</span>{" "}
+              {total === 1
                 ? footerCountLabels.singular
                 : footerCountLabels.plural}
             </span>
@@ -298,14 +316,14 @@ export function DataTable<T>({
             <span className="text-[12px] text-muted-foreground tabular-nums">
               Showing{" "}
               <span className="text-foreground font-medium">
-                {Math.min((page - 1) * pageSize + 1, data.length)}–
-                {Math.min(page * pageSize, data.length)}
+                {Math.min((page - 1) * pageSize + 1, total)}–
+                {Math.min(page * pageSize, total)}
               </span>{" "}
               of{" "}
               <span className="text-foreground font-medium">
-                {data.length.toLocaleString()}
+                {total.toLocaleString()}
               </span>{" "}
-              {data.length !== 1 ? "results" : "result"}
+              {total !== 1 ? "results" : "result"}
             </span>
           )}
 

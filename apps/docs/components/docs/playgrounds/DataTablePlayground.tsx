@@ -11,20 +11,25 @@ import {
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";
 
-type Row = { id: string; name: string; status: string };
+type Row = { id: string; name: string; status: "active" | "pending" };
 
 const rows: Row[] = [
   { id: "1", name: "Acme Corp", status: "active" },
-  { id: "2", name: "Globex", status: "pending" },
-  { id: "3", name: "Initech", status: "active" },
+  { id: "2", name: "Globex",    status: "pending" },
+  { id: "3", name: "Initech",   status: "active" },
 ];
+
+const STATUS_MAP = {
+  active:  { variant: "success",  label: "Active",  trailIcon: "check" },
+  pending: { variant: "warning",  label: "Pending" },
+} as const;
 
 const columns: Column<Row>[] = [
   { key: "name", header: "Merchant", render: (r) => r.name },
   {
     key: "status",
     header: "Status",
-    render: (r) => <StatusBadge status={r.status} size="sm" />,
+    render: (r) => <StatusBadge {...STATUS_MAP[r.status]} size="sm" />,
   },
 ];
 
