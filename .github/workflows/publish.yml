@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Build package
+        run: npm run build --workspace=packages/flux-ui
+
       - name: Publish
         run: npm publish --workspace=packages/flux-ui
         env:

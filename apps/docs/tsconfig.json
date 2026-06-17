@@ -27,7 +27,7 @@
         "./*"
       ],
       "@payglocal_ui/flux-ui": [
-        "../../packages/flux-ui/src/index.ts"
+        "../../packages/flux-ui/dist/index.d.ts"
       ]
     }
   },
