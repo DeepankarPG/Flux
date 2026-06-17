@@ -5,7 +5,7 @@ import { Github, Menu } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/docs/ThemeToggle";
-import { getDocsNavSections } from "@/lib/docs-nav";
+import { getDocsNavSections, getComponentNavGroups } from "@/lib/docs-nav";
 import { getGitHubUrl } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +14,7 @@ export function DocsTopBar() {
   const [open, setOpen] = useState(false);
   const githubUrl = getGitHubUrl();
   const sections = getDocsNavSections();
+  const componentGroups = getComponentNavGroups();
 
   const docsActive =
     pathname === "/docs" ||
@@ -109,21 +110,13 @@ export function DocsTopBar() {
                 <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{section.label}</p>
                 <ul className="space-y-0.5">
                   {section.items.map((item) => {
-                    const active =
-                      item.href === "/docs"
-                        ? pathname === "/docs"
-                        : item.href === "/docs/components"
-                          ? pathname === "/docs/components"
-                          : pathname === item.href || pathname.startsWith(`${item.href}/`);
+                    const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
                     return (
                       <li key={item.href}>
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className={cn(
-                            "block rounded-md px-2 py-2 text-sm",
-                            active ? "bg-muted font-medium text-foreground" : "text-muted-foreground"
-                          )}
+                          className={cn("block rounded-md px-2 py-2 text-sm", active ? "bg-muted font-medium text-foreground" : "text-muted-foreground")}
                         >
                           {item.title}
                         </Link>
@@ -133,6 +126,30 @@ export function DocsTopBar() {
                 </ul>
               </div>
             ))}
+            <div>
+              <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Components</p>
+              {componentGroups.map((group) => (
+                <div key={group.label} className="mb-2">
+                  <p className="mb-0.5 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">{group.label}</p>
+                  <ul className="space-y-0.5">
+                    {group.items.map((item) => {
+                      const active = pathname === item.href;
+                      return (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className={cn("block rounded-md px-2 py-1.5 text-sm", active ? "bg-muted font-medium text-foreground" : "text-muted-foreground")}
+                          >
+                            {item.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </nav>
         </div>
       ) : null}

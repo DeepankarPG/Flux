@@ -47,6 +47,7 @@
   --radius-4xl: 1.5rem;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
   --ease-pg-standard: var(--motion-ease-standard);
   --ease-pg-emphasized: var(--motion-ease-emphasized);
   --ease-pg-linear: var(--motion-ease-linear);

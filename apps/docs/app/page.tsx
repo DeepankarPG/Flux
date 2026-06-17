@@ -1,5 +1,604 @@
-import { redirect } from "next/navigation";
+"use client";
 
-export default function HomePage() {
-  redirect("/docs");
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, Copy, Github, Plus } from "lucide-react";
+
+/* ─── font stacks — Flux system fonts ─── */
+const serif = { fontFamily: "var(--font-geist-sans), system-ui, sans-serif" } as const; // headings — Geist Sans
+const mono  = { fontFamily: "var(--font-geist-mono), monospace" } as const;             // labels, nav, tags, code
+const sans  = { fontFamily: "var(--font-geist-sans), system-ui, sans-serif" } as const; // body copy
+
+const GH_URL  = "https://github.com/PayGlocal-Technologies/Flux";
+const NPM_URL = "https://www.npmjs.com/package/@payglocal_ui/flux-ui";
+
+/* ════════════════════════════════════════
+   MARQUEE  (+ dividers, full-width dark)
+════════════════════════════════════════ */
+const MARQUEE = [
+  "Make your app AI-ready",
+  "68+ components",
+  "Tailwind v4",
+  "Open source",
+  "Dark mode",
+  "TypeScript",
+  "Radix UI",
+  "MIT License",
+  "React 18+",
+  "PayGlocal",
+];
+
+function Marquee() {
+  const items = [...MARQUEE, ...MARQUEE];
+  return (
+    <div className="overflow-hidden border-t border-white/[0.07] bg-[#0a0a0a] py-4">
+      <div className="flex gap-0 whitespace-nowrap"
+        style={{ animation: "marquee 32s linear infinite", width: "max-content" }}>
+        {items.map((t, i) => (
+          <span key={i} className="inline-flex items-center gap-6 px-6 text-[10px] uppercase tracking-[0.22em] text-white/30" style={mono}>
+            <Plus className="size-3 text-white/15 shrink-0" />
+            {t}
+          </span>
+        ))}
+      </div>
+      <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
+   TYPEWRITER CODE BLOCK
+════════════════════════════════════════ */
+const CODE_LINES: [string, string][] = [
+  ["# install", "text-white/25"],
+  ["npm i @payglocal_ui/flux-ui", "text-white/75"],
+  ["", ""],
+  ["# next.config.ts", "text-white/25"],
+  ['transpilePackages: ["@payglocal_ui/flux-ui"]', "text-blue-400"],
+  ["", ""],
+  ["# globals.css", "text-white/25"],
+  ['@source ".../flux-ui/src/**/*.{ts,tsx}"', "text-emerald-400"],
+  ["", ""],
+  ['import { Button } from "@payglocal_ui/flux-ui"', "text-white/75"],
+  ['<Button variant="primary">Pay now</Button>', "text-white/50"],
+];
+
+function TypewriterCode() {
+  // visibleLines: how many full lines shown; charCount: chars typed on current line
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [charCount, setCharCount]     = useState(0);
+  const rafRef = useRef<number>(0);
+  const stateRef = useRef({ line: 0, char: 0, pause: 0 });
+
+  useEffect(() => {
+    const CHAR_DELAY = 38;   // ms per character
+    const LINE_PAUSE = 120;  // ms pause between lines
+    const END_PAUSE  = 1800; // ms pause before looping
+    let lastTime = performance.now();
+
+    const tick = (now: number) => {
+      const dt = now - lastTime;
+      const s  = stateRef.current;
+
+      if (s.pause > 0) {
+        s.pause -= dt;
+        lastTime = now;
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      const [text] = CODE_LINES[s.line];
+
+      if (s.char < text.length) {
+        // accumulate time for char-by-char
+        const steps = Math.floor(dt / CHAR_DELAY);
+        if (steps > 0) {
+          s.char = Math.min(s.char + steps, text.length);
+          setCharCount(s.char);
+          lastTime = now;
+        }
+      } else {
+        // line complete — advance
+        s.line++;
+        s.char = 0;
+        setCharCount(0);
+
+        if (s.line >= CODE_LINES.length) {
+          // loop: reset after end pause
+          s.pause = END_PAUSE;
+          s.line  = 0;
+          setVisibleLines(0);
+        } else {
+          s.pause = LINE_PAUSE;
+          setVisibleLines(s.line);
+        }
+        lastTime = now;
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  return (
+    <div className="rounded-2xl border border-white/[0.08] bg-[#0c0c0e] overflow-hidden shadow-2xl">
+      <div className="border-b border-white/[0.06] bg-[#111] px-5 py-3 flex gap-2 items-center">
+        {["","",""].map((_,i) => <div key={i} className="h-2.5 w-2.5 rounded-full bg-white/10" />)}
+        <span className="ml-2 text-[10px] uppercase tracking-[0.16em] text-white/20" style={mono}>terminal</span>
+      </div>
+      <div className="p-6 space-y-2 text-[13px] h-[280px] overflow-hidden" style={mono}>
+        {CODE_LINES.map(([text, cls], i) => {
+          if (i < visibleLines) {
+            // fully typed line
+            return <div key={i} className={cls || "h-3"}>{text}</div>;
+          }
+          if (i === visibleLines) {
+            // currently typing line
+            const partial = text.slice(0, charCount);
+            return (
+              <div key={i} className={cls}>
+                {partial}
+                <span className="inline-block w-[2px] h-[1em] bg-current align-middle ml-[1px] animate-pulse" />
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
+   DOT GRID (repel on hover)
+════════════════════════════════════════ */
+function DotGrid({ cols = 26, rows = 14 }: { cols?: number; rows?: number }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dotsRef = useRef<{ x: number; y: number; vx: number; vy: number }[]>(
+    Array.from({ length: cols * rows }, () => ({ x: 0, y: 0, vx: 0, vy: 0 }))
+  );
+  const mouseRef = useRef<{ x: number; y: number } | null>(null);
+  const rafRef   = useRef<number>(0);
+
+  useEffect(() => {
+    const tick = () => {
+      const els = containerRef.current?.querySelectorAll<HTMLSpanElement>("[data-dot]");
+      if (!els) { rafRef.current = requestAnimationFrame(tick); return; }
+      const rect = containerRef.current!.getBoundingClientRect();
+      const m    = mouseRef.current;
+
+      els.forEach((el, i) => {
+        const d  = dotsRef.current[i];
+        const er = el.getBoundingClientRect();
+        const cx = er.left - rect.left + er.width / 2;
+        const cy = er.top  - rect.top  + er.height / 2;
+        if (m) {
+          const dx = cx - m.x, dy = cy - m.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 90 && dist > 0) {
+            const f = (1 - dist / 90) * 32;
+            d.vx += (dx / dist) * f * 0.45;
+            d.vy += (dy / dist) * f * 0.45;
+          }
+        }
+        d.vx *= 0.72; d.vy *= 0.72;
+        d.x  += d.vx; d.y  += d.vy;
+        d.x  *= 0.80; d.y  *= 0.80;
+        el.style.transform = `translate(calc(-50% + ${d.x}px),calc(-50% + ${d.y}px))`;
+      });
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  return (
+    <div ref={containerRef}
+      className="grid select-none"
+      style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "20px" }}
+      onMouseMove={e => {
+        const r = containerRef.current!.getBoundingClientRect();
+        mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top };
+      }}
+      onMouseLeave={() => { mouseRef.current = null; }}>
+      {Array.from({ length: cols * rows }).map((_, i) => (
+        <span key={i} data-dot
+          className="relative block rounded-full bg-white/20"
+          style={{ width: 3, height: 3, position: "relative", left: "50%", top: "50%" }} />
+      ))}
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
+   FAQ ACCORDION
+════════════════════════════════════════ */
+const FAQS = [
+  { q: "What is Flux UI?",
+    a: "Flux UI is PayGlocal's open design system — the same component library, design tokens, and patterns used in the production merchant dashboard. It's published under the MIT license so any team can install, fork, and extend it without restrictions." },
+  { q: "How is it different from shadcn/ui?",
+    a: "Flux UI is purpose-built for payment and fintech interfaces. While shadcn/ui provides general-purpose primitives, Flux ships domain-specific components like CurrencyAmountInput, OtpInput, StatusBadge, and DataTable shaped by real PayGlocal merchant dashboard requirements — not hypotheticals." },
+  { q: "Does it work with Turbopack?",
+    a: "Yes. v0.2.0+ ships compiled JS to dist/ so there's no raw TypeScript in node_modules. Turbopack, Webpack, and Vite all work without any custom loaders or transpilePackages config changes." },
+  { q: "Can I use it without Next.js?",
+    a: "Yes. Flux UI is framework-agnostic React — it works with Vite, Remix, or any React 18+ setup. The only Next.js-specific piece is the docs site itself. Peer dependencies are just react and react-dom." },
+  { q: "Is dark mode supported?",
+    a: "Yes. Every component uses CSS variables that switch automatically when you add the .dark class to your root element. We recommend next-themes for React apps, which wires up system preference detection and manual toggling with zero config." },
+  { q: "What does v0.2.0 include?",
+    a: "v0.2.0 ships 40+ new components including Drawer, Spotlight, SideNav, Accordion, Flag, CountrySelect, CheckboxSelect, InlineEdit, Lozenge, and more. It also moves to compiled dist output for Turbopack compatibility and adds full TypeScript declaration files." },
+  { q: "How do I contribute?",
+    a: "The repo is open at github.com/PayGlocal-Technologies/Flux. File an issue to report bugs or request features, open a pull request with your changes, or start a GitHub Discussion for broader ideas. PRs are reviewed based on team bandwidth." },
+];
+
+function FaqItem({ q, a, light }: { q: string; a: string; light?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  return (
+    <div className={`border-b last:border-0 ${light ? "border-zinc-200" : "border-white/[0.07]"}`}>
+      <button onClick={() => setOpen(v => !v)}
+        className="flex w-full items-start justify-between gap-6 py-5 text-left">
+        <span className={`text-[17px] font-normal ${light ? "text-zinc-800" : "text-white/85"}`} style={sans}>{q}</span>
+        <span className={`mt-1 shrink-0 transition-transform ${light ? "text-zinc-400" : "text-white/30"}`} style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}>
+          <Plus className="size-5" />
+        </span>
+      </button>
+      <div ref={bodyRef} className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: open ? (bodyRef.current?.scrollHeight ?? 400) : 0 }}>
+        <p className={`pb-6 text-[15px] leading-relaxed ${light ? "text-zinc-500" : "text-white/45"}`} style={sans}>{a}</p>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
+   NAV LINKS
+════════════════════════════════════════ */
+const NAV = [
+  { href: "/docs/foundations", label: "Foundations" },
+  { href: "/docs/components",  label: "Components"  },
+  { href: "/docs/patterns",    label: "Patterns"    },
+  { href: "/docs",             label: "Docs"        },
+];
+
+/* ════════════════════════════════════════
+   PAGE
+════════════════════════════════════════ */
+function InstallCommand() {
+  const [copied, setCopied] = useState(false);
+  const cmd = "npm i @payglocal_ui/flux-ui";
+
+  const copy = () => {
+    navigator.clipboard.writeText(cmd);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="mt-10 flex max-w-md items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
+      <code className="text-[13px] text-white/60" style={mono}>
+        npm i <span className="text-white">@payglocal_ui/flux-ui</span>
+      </code>
+      <div className="ml-3 flex items-center gap-2">
+        <span className="rounded-md border border-white/[0.08] px-2 py-0.5 text-[9px] text-white/30" style={mono}>v0.2.0</span>
+        <button
+          onClick={copy}
+          className="flex h-6 w-6 items-center justify-center rounded text-white/30 transition-colors hover:bg-white/[0.08] hover:text-white/70"
+          aria-label="Copy install command"
+        >
+          {copied ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function LandingPage() {
+
+  return (
+    <div style={{ background: "#0a0a0a", color: "#fff", ...sans }}>
+
+      {/* ── NAV ── */}
+      <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-white/[0.07] bg-[#0a0a0a]/95 px-6 backdrop-blur lg:px-10">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5">
+          <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none">
+            <rect width="32" height="32" rx="7" fill="#2563eb"/>
+            <path d="M8 9h16M8 16h10M8 23h13" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+          <span className="text-[11px] uppercase tracking-[0.2em] text-white/80" style={mono}>Flux UI</span>
+          <span className="rounded border border-blue-500/40 bg-blue-600/20 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-blue-400" style={mono}>v0.2</span>
+        </Link>
+
+        {/* Nav links */}
+        <nav className="hidden items-center gap-1 sm:flex">
+          {NAV.map(l => (
+            <Link key={l.href} href={l.href}
+              className="px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-white/40 transition-colors hover:text-white/80"
+              style={mono}>
+              / {l.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA */}
+        <Link href="/docs/installation"
+          className="hidden h-8 items-center gap-1.5 rounded-lg border border-white/20 px-4 text-[10px] uppercase tracking-[0.16em] text-white/80 transition-colors hover:border-white/40 hover:text-white sm:flex"
+          style={mono}>
+          Get started <ArrowUpRight className="size-3" />
+        </Link>
+      </header>
+
+      {/* ── POWERED BY strip ── */}
+      <div className="flex items-center justify-center gap-3 border-b border-white/[0.06] bg-[#0a0a0a] py-2.5">
+        <span className="text-[9px] uppercase tracking-[0.22em] text-white/25" style={mono}>
+          Open design system · PayGlocal Technologies
+        </span>
+        <span className="text-white/10">///</span>
+        <span className="text-[9px] uppercase tracking-[0.22em] text-white/25" style={mono}>
+          React · Tailwind v4 · Radix UI · TypeScript
+        </span>
+      </div>
+
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden" style={{ background: "#0a0a0a" }}>
+        {/* Blue glow top-left only */}
+        <div className="pointer-events-none absolute -left-40 -top-20 h-[400px] w-[500px] rounded-full bg-blue-600/10 blur-[100px]" />
+
+        <div className="relative mx-auto grid max-w-[1400px] min-h-[420px] grid-cols-1 gap-0 border-x border-white/[0.06] lg:grid-cols-[1fr_1px_1fr]">
+          {/* Left — copy */}
+          <div className="flex flex-col justify-center px-8 py-12 lg:px-14">
+            {/* Eyebrow */}
+            <div className="mb-8 inline-flex w-fit items-center gap-2 rounded border border-white/10 bg-white/[0.04] px-3 py-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
+              <span className="text-[9px] uppercase tracking-[0.22em] text-white/50" style={mono}>
+                Now live · Open source design system
+              </span>
+            </div>
+
+            <h1 className="text-[clamp(2.4rem,5vw,3.8rem)] font-semibold leading-[1.1] tracking-tight text-white" style={serif}>
+              The design system<br />
+              we ship in product.
+            </h1>
+
+            <p className="mt-6 max-w-[400px] text-[14px] leading-relaxed text-white/45" style={sans}>
+              Flux UI delivers 68+ production-grade components, semantic design tokens,
+              and patterns — same system PayGlocal uses in the merchant dashboard.
+            </p>
+
+            {/* Install command */}
+            <InstallCommand />
+
+            {/* CTAs */}
+            <div className="mt-5 flex items-center gap-3">
+              <Link href="/docs/installation"
+                className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[var(--primary-hover)]"
+                style={sans}>
+                Get started <ArrowUpRight className="size-4" />
+              </Link>
+              <a href={GH_URL} target="_blank" rel="noreferrer"
+                className="inline-flex h-10 items-center gap-2 rounded-lg border border-white/10 px-5 text-sm font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+                style={sans}>
+                <Github className="size-4" /> GitHub
+              </a>
+            </div>
+
+            {/* Compatible with */}
+            <div className="mt-8 flex items-center gap-4">
+              <span className="text-[10px] uppercase tracking-[0.18em] text-white/25" style={mono}>Works with:</span>
+              {["Next.js", "Vite", "Remix", "Turbopack"].map(f => (
+                <span key={f} className="text-[10px] text-white/35" style={mono}>{f}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden bg-white/[0.06] lg:block" />
+
+          {/* Right — hero image, edge-to-edge */}
+          <div className="relative hidden overflow-hidden lg:block">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-doc.png"
+              alt="Flux UI design system"
+              className="h-full w-full object-cover object-center"
+              style={{ minHeight: 420 }}
+            />
+          </div>
+
+        </div>
+
+        {/* Stats row */}
+        <div className="relative mx-auto grid max-w-[1400px] grid-cols-3 border-t border-x border-white/[0.06]">
+          {[
+            { label: "Components shipped", val: "68+_" },
+            { label: "Tailwind CSS version", val: "v4_"  },
+            { label: "Open source license",  val: "MIT_" },
+          ].map((s, i) => (
+            <div key={s.label} className={`px-8 py-7 ${i < 2 ? "border-r border-white/[0.06]" : ""}`}>
+              <p className="text-[9px] uppercase tracking-[0.2em] text-white/25 mb-2" style={mono}>{s.label}</p>
+              <p className="text-[2rem] font-semibold text-white" style={serif}>{s.val}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── MARQUEE ── */}
+      <Marquee />
+
+      {/* ── PILLARS — light ── */}
+      <section className="border-t border-zinc-200 bg-white px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="mb-14">
+            <p className="mb-3 text-[9px] uppercase tracking-[0.22em] text-zinc-400" style={mono}>/ System</p>
+            <h2 className="text-[clamp(2.8rem,5vw,4.2rem)] font-semibold leading-[1.1] tracking-tight text-zinc-900" style={serif}>
+              Design and develop
+              <br />with confidence
+            </h2>
+          </div>
+
+          <div className="grid border border-zinc-200 sm:grid-cols-3">
+            {[
+              { num: "001", href: "/docs/foundations", title: "Foundations",
+                desc: "Tokens, color, type, spacing, grid, motion.",
+                tags: ["Tokens", "Color", "Spacing", "Grid", "Motion"],
+                stat: "35+", statLabel: "tokens" },
+              { num: "002", href: "/docs/components", title: "Components",
+                desc: "Production primitives with live previews and a11y.",
+                tags: ["Button", "DataTable", "OTP", "StatusBadge", "Drawer"],
+                stat: "68+", statLabel: "components" },
+              { num: "003", href: "/docs/patterns", title: "Patterns",
+                desc: "Dashboard shell, forms, and multi-step flows.",
+                tags: ["Dashboard", "Forms", "Auth"],
+                stat: "3+", statLabel: "patterns" },
+            ].map(p => (
+              <Link key={p.num} href={p.href}
+                className="group flex flex-col border-r border-zinc-200 bg-white p-8 transition-colors last:border-r-0 hover:bg-zinc-50">
+                <div className="mb-8 flex items-center justify-between">
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-400" style={mono}>{p.num}</span>
+                  <ArrowUpRight className="size-4 text-zinc-300 transition-colors group-hover:text-zinc-700" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-[22px] font-semibold text-zinc-900" style={serif}>{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-500" style={sans}>{p.desc}</p>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-1.5">
+                  {p.tags.map(t => (
+                    <span key={t} className="rounded-md border border-zinc-200 px-2 py-0.5 text-[9px] uppercase tracking-[0.14em] text-zinc-400" style={mono}>{t}</span>
+                  ))}
+                </div>
+                <div className="mt-6 border-t border-zinc-100 pt-5 flex items-baseline gap-1.5">
+                  <span className="text-3xl font-semibold text-zinc-900" style={serif}>{p.stat}</span>
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-zinc-400" style={mono}>{p.statLabel}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ALTERNATING FEATURES ── */}
+      {[
+        { cat: "Developer experience",
+          title: "Install in one command.\nStart building immediately.",
+          body: "Configure Tailwind v4 with two @source lines, paste the CSS token block, add transpilePackages. Works with Turbopack, Webpack, and Vite.",
+          href: "/docs/installation", cta: "Installation guide",
+          visual: <TypewriterCode />,
+        },
+      ].map((feat, i) => (
+        <section key={i} className="border-t border-white/[0.06] bg-[#0a0a0a] px-6 py-20 lg:px-10 lg:py-24">
+          <div className="mx-auto max-w-[1400px]">
+            <div className={`grid gap-16 lg:grid-cols-2 lg:items-center ${i % 2 === 1 ? "" : ""}`}>
+              <div className={i % 2 === 1 ? "lg:order-2" : ""}>
+                <p className="mb-3 text-[9px] uppercase tracking-[0.22em] text-blue-400" style={mono}>{feat.cat}</p>
+                <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-normal leading-[1.06] tracking-tight text-white whitespace-pre-line" style={serif}>
+                  {feat.title}
+                </h2>
+                <p className="mt-5 text-[14px] leading-relaxed text-white/40" style={sans}>{feat.body}</p>
+                <Link href={feat.href}
+                  className="mt-8 inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-white/50 underline-offset-4 hover:text-white"
+                  style={mono}>
+                  {feat.cta} <ArrowUpRight className="size-3.5" />
+                </Link>
+              </div>
+              <div className={i % 2 === 1 ? "lg:order-1" : ""}>{feat.visual}</div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ── FAQ — light ── */}
+      <section className="border-t border-zinc-200 bg-white px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid gap-16 lg:grid-cols-[420px_1fr]">
+            <div className="lg:sticky lg:top-20 lg:self-start">
+              <div className="mb-5 inline-flex items-center rounded border border-zinc-200 px-3 py-1.5">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-zinc-400" style={mono}>FAQ</span>
+              </div>
+              <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.1] tracking-tight text-zinc-900" style={serif}>
+                Frequently<br />asked questions
+              </h2>
+              <p className="mt-5 text-[14px] leading-relaxed text-zinc-500" style={sans}>
+                Can&apos;t find what you need?{" "}
+                <a href={GH_URL} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline">
+                  Open a GitHub issue.
+                </a>
+              </p>
+            </div>
+            <div>{FAQS.map(f => <FaqItem key={f.q} q={f.q} a={f.a} light />)}</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="border-t border-white/[0.06] bg-[#0a0a0a] px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
+            <div className="max-w-xs space-y-5">
+              <div className="flex items-center gap-2.5">
+                <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none">
+                  <rect width="32" height="32" rx="7" fill="#2563eb"/>
+                  <path d="M8 9h16M8 16h10M8 23h13" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                </svg>
+                <span className="text-[13px] uppercase tracking-[0.2em] text-white/70" style={mono}>Flux UI</span>
+              </div>
+              <p className="text-[15px] leading-relaxed text-white/40" style={sans}>
+                Open design system by PayGlocal Technologies. MIT licensed.
+                Built with React, Tailwind CSS v4, and Radix UI.
+              </p>
+              <div className="flex gap-5">
+                <a href={GH_URL}  target="_blank" rel="noreferrer" className="text-[11px] uppercase tracking-[0.18em] text-white/35 hover:text-white/70" style={mono}>GitHub ↗</a>
+                <a href={NPM_URL} target="_blank" rel="noreferrer" className="text-[11px] uppercase tracking-[0.18em] text-white/35 hover:text-white/70" style={mono}>npm ↗</a>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+              {[
+                { label: "System", links: [
+                  {href:"/docs",label:"Introduction"},
+                  {href:"/docs/installation",label:"Installation"},
+                  {href:"/docs/theming",label:"Theming"},
+                  {href:"/docs/guidelines",label:"Guidelines"},
+                ]},
+                { label: "Foundations", links: [
+                  {href:"/docs/foundations/design-tokens",label:"Design tokens"},
+                  {href:"/docs/foundations/color",label:"Color palette"},
+                  {href:"/docs/foundations/spacing",label:"Spacing"},
+                  {href:"/docs/foundations/grid",label:"Grid"},
+                ]},
+                { label: "Resources", links: [
+                  {href:"/docs/components",label:"Components"},
+                  {href:"/docs/patterns",label:"Patterns"},
+                  {href:"/docs/content",label:"Content"},
+                  {href:GH_URL,label:"GitHub ↗",external:true},
+                ]},
+              ].map(col => (
+                <div key={col.label}>
+                  <p className="mb-5 text-[10px] uppercase tracking-[0.2em] text-white/40" style={mono}>{col.label}</p>
+                  <ul className="space-y-3.5">
+                    {col.links.map(link => (
+                      <li key={link.href}>
+                        {"external" in link && link.external ? (
+                          <a href={link.href} target="_blank" rel="noreferrer"
+                            className="text-[14px] text-white/35 transition-colors hover:text-white/70" style={sans}>{link.label}</a>
+                        ) : (
+                          <Link href={link.href}
+                            className="text-[14px] text-white/35 transition-colors hover:text-white/70" style={sans}>{link.label}</Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-12 flex items-center justify-between border-t border-white/[0.06] pt-8">
+            <span className="text-[13px] text-white/30" style={sans}>© 2026 PayGlocal Technologies</span>
+            <span className="text-[11px] uppercase tracking-[0.18em] text-white/20" style={mono}>MIT License</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  );
 }

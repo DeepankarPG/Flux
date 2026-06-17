@@ -13,7 +13,7 @@ export function getGitHubUrl(): string {
   if (typeof process !== "undefined" && process.env.NEXT_PUBLIC_UI_DOCS_GITHUB_URL) {
     return process.env.NEXT_PUBLIC_UI_DOCS_GITHUB_URL;
   }
-  return "";
+  return "https://github.com/PayGlocal-Technologies/Flux";
 }
 
 export function getNpmInstallCommand(): string {
