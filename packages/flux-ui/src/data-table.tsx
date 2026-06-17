@@ -107,6 +107,18 @@ export function DataTable<T>({
   const totalPages = Math.ceil(total / pageSize);
   const paginated = isControlled ? data : data.slice((page - 1) * pageSize, page * pageSize);
 
+  // Guard against duplicate / non-unique rowKey() results. React silently fails
+  // to unmount old <tr> nodes when sibling keys collide, leaving stale rows
+  // rendered on top of new data (or the empty state). De-dupe by suffixing
+  // repeats so every rendered row gets a unique, stable key.
+  const seenKeys = new Map<string, number>();
+  const rowKeys = paginated.map((row) => {
+    const base = rowKey(row);
+    const seen = seenKeys.get(base) ?? 0;
+    seenKeys.set(base, seen + 1);
+    return seen === 0 ? base : `${base}__${seen}`;
+  });
+
   const comfortable = density === "comfortable";
   const compact = density === "compact";
   const compactCellPad = compact
@@ -220,7 +232,7 @@ export function DataTable<T>({
             ) : (
               paginated.map((row, i) => (
                 <tr
-                  key={rowKey(row)}
+                  key={rowKeys[i]}
                   className={cn(
                     "group transition-colors duration-150 border-b border-border/60 last:border-b-0",
                     comfortable && "min-h-[56px]",
