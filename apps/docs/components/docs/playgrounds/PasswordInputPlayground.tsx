@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Field, FieldError, FieldLabel, PasswordInput } from "@deepankarraj/flux-ui";
+import { Field, FieldError, FieldLabel, PasswordInput } from "@payglocal_ui/flux-ui";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";
 
 type FieldState = "default" | "disabled" | "invalid";

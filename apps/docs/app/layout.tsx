@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/docs/ThemeProvider";
-import { Toaster } from "@deepankarraj/flux-ui";
+import { Toaster } from "@payglocal_ui/flux-ui";
 import "./globals.css";
 
 const geistSans = Geist({

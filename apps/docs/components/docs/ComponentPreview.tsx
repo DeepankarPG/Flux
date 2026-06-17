@@ -162,7 +162,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   toast,
-} from "@deepankarraj/flux-ui";
+} from "@payglocal_ui/flux-ui";
 import { ButtonPlayground } from "@/components/docs/playgrounds/ButtonPlayground";
 import { CalendarPlayground } from "@/components/docs/playgrounds/CalendarPlayground";
 import { CardPlayground } from "@/components/docs/playgrounds/CardPlayground";
@@ -676,7 +676,7 @@ export function ComponentPreview({ slug }: { slug: string }) {
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>How do I install it?</AccordionTrigger>
-              <AccordionContent>Run <Code>npm install @deepankarraj/flux-ui</Code> and follow the Tailwind v4 setup in the Installation guide.</AccordionContent>
+              <AccordionContent>Run <Code>npm install @payglocal_ui/flux-ui</Code> and follow the Tailwind v4 setup in the Installation guide.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>Is dark mode supported?</AccordionTrigger>
@@ -745,7 +745,7 @@ export function ComponentPreview({ slug }: { slug: string }) {
           </Callout>
           <Callout variant="warning">
             <CalloutIcon variant="warning" />
-            <div><CalloutTitle>Breaking change</CalloutTitle><CalloutText>The package scope changed from @flux/ui to @deepankarraj/flux-ui in v0.2.</CalloutText></div>
+            <div><CalloutTitle>Breaking change</CalloutTitle><CalloutText>The package scope changed from @flux/ui to @payglocal_ui/flux-ui in v0.2.</CalloutText></div>
           </Callout>
         </Stack>
       );
@@ -761,8 +761,8 @@ export function ComponentPreview({ slug }: { slug: string }) {
     case "code":
       return (
         <Stack gap="md" className="mx-auto w-full max-w-lg text-left">
-          <p className="text-sm text-muted-foreground">Import the component using <Code>@deepankarraj/flux-ui</Code> and wrap with <Code>TooltipProvider</Code>.</p>
-          <CodeBlock language="tsx" filename="example.tsx" code={`import { Button } from "@deepankarraj/flux-ui";
+          <p className="text-sm text-muted-foreground">Import the component using <Code>@payglocal_ui/flux-ui</Code> and wrap with <Code>TooltipProvider</Code>.</p>
+          <CodeBlock language="tsx" filename="example.tsx" code={`import { Button } from "@payglocal_ui/flux-ui";
 
 export function MyPage() {
   return <Button variant="primary">Get started</Button>;

@@ -19,7 +19,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
   type DateRange,
-} from "@deepankarraj/flux-ui";
+} from "@payglocal_ui/flux-ui";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

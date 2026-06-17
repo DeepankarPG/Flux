@@ -17,5 +17,5 @@ export function getGitHubUrl(): string {
 }
 
 export function getNpmInstallCommand(): string {
-  return "npm install @deepankarraj/flux-ui";
+  return "npm install @payglocal_ui/flux-ui";
 }

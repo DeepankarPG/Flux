@@ -2,7 +2,7 @@
 
 **Open design system by PayGlocal** — React components, design tokens, and documentation built for merchant-grade product interfaces.
 
-[![npm](https://img.shields.io/npm/v/@deepankarraj/flux-ui)](https://www.npmjs.com/package/@deepankarraj/flux-ui)
+[![npm](https://img.shields.io/npm/v/@payglocal_ui/flux-ui)](https://www.npmjs.com/package/@payglocal_ui/flux-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Docs](https://img.shields.io/badge/docs-flux--docs--dusky.vercel.app-blue)](https://flux-docs-dusky.vercel.app)
 
@@ -27,7 +27,7 @@ Every component has a live interactive preview, import snippet, and usage exampl
 ## Install
 
 ```bash
-npm install @deepankarraj/flux-ui
+npm install @payglocal_ui/flux-ui
 ```
 
 Peer dependencies:
@@ -49,7 +49,7 @@ Add these two `@source` lines so Tailwind scans Flux class names:
 @import "tailwindcss";
 
 @source "../**/*.{ts,tsx}";
-@source "../../../node_modules/@deepankarraj/flux-ui/src/**/*.{ts,tsx}";
+@source "../../../node_modules/@payglocal_ui/flux-ui/src/**/*.{ts,tsx}";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -77,7 +77,7 @@ Add `transpilePackages` to your `next.config.ts`:
 
 ```ts
 const nextConfig = {
-  transpilePackages: ["@deepankarraj/flux-ui"],
+  transpilePackages: ["@payglocal_ui/flux-ui"],
 };
 export default nextConfig;
 ```
@@ -87,7 +87,7 @@ export default nextConfig;
 ## Usage
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from "@deepankarraj/flux-ui";
+import { Button, Card, CardHeader, CardTitle, CardContent } from "@payglocal_ui/flux-ui";
 
 export function MyPage() {
   return (

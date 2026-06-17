@@ -1,7 +1,7 @@
 "use client";
 
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
-import { ScrollArea, ScrollBar } from "@deepankarraj/flux-ui";
+import { ScrollArea, ScrollBar } from "@payglocal_ui/flux-ui";
 
 export function ScrollAreaPlayground() {
   return (

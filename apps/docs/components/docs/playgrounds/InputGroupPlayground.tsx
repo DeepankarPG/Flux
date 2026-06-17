@@ -10,7 +10,7 @@ import {
   InputGroupText,
   InputGroupTextarea,
   Stack,
-} from "@deepankarraj/flux-ui";
+} from "@payglocal_ui/flux-ui";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";
 

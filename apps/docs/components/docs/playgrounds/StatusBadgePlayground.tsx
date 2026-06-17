@@ -1,7 +1,7 @@
 "use client";
 
-import { Stack, StatusBadge } from "@deepankarraj/flux-ui";
-import type { BadgeVariant, BadgeTrailIcon } from "@deepankarraj/flux-ui";
+import { Stack, StatusBadge } from "@payglocal_ui/flux-ui";
+import type { BadgeVariant, BadgeTrailIcon } from "@payglocal_ui/flux-ui";
 
 type BadgeExample = { label: string; variant: BadgeVariant; trailIcon?: BadgeTrailIcon };
 

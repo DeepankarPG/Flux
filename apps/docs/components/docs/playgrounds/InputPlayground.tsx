@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Input, Label, Textarea } from "@deepankarraj/flux-ui";
+import { Input, Label, Textarea } from "@payglocal_ui/flux-ui";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "@/components/docs/CodeBlock";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";

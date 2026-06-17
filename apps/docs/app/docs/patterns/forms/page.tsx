@@ -14,7 +14,7 @@ const EXAMPLE = `import {
   FieldGroup,
   Input,
   Button,
-} from "@deepankarraj/flux-ui";
+} from "@payglocal_ui/flux-ui";
 
 <FieldGroup className="max-w-md space-y-4">
   <Field>

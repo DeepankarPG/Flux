@@ -11,7 +11,7 @@ import {
   FieldSet,
   Input,
   Stack,
-} from "@deepankarraj/flux-ui";
+} from "@payglocal_ui/flux-ui";
 
 export function FieldPlayground() {
   return (

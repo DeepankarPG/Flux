@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { OtpInput } from "@deepankarraj/flux-ui";
+import { OtpInput } from "@payglocal_ui/flux-ui";
 import { DocsVariantField, DocsVariantSelect, DocsVariantToolbar } from "@/components/docs/DocsVariantToolbar";
 
 export function OtpInputPlayground() {
