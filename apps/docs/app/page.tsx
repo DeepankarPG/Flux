@@ -4,6 +4,135 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Copy, Github, Plus } from "lucide-react";
 
+/* ════════════════════════════════════════
+   PLUS GRID — cursor repel
+════════════════════════════════════════ */
+function PlusGrid({
+  cols = 26,
+  rows = 14,
+  opacity = 0.45,
+  className = "",
+}: {
+  cols?: number;
+  rows?: number;
+  opacity?: number;
+  className?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const activeRef = useRef(false);
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  const dots = Array.from({ length: cols * rows }, (_, i) => {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    return {
+      cx: ((col + 0.5) / cols) * 100,
+      cy: ((row + 0.5) / rows) * 100,
+    };
+  });
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    function tick() {
+      const spans = container!.querySelectorAll<HTMLSpanElement>("[data-plus]");
+      const rect = container!.getBoundingClientRect();
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      const RADIUS = 90;
+      const STRENGTH = 32;
+
+      spans.forEach((span) => {
+        const pctX = parseFloat(span.dataset.cx!);
+        const pctY = parseFloat(span.dataset.cy!);
+        const dotX = (pctX / 100) * rect.width;
+        const dotY = (pctY / 100) * rect.height;
+        const dx = dotX - mx;
+        const dy = dotY - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < RADIUS && dist > 0) {
+          const force = (1 - dist / RADIUS) * STRENGTH;
+          const tx = (dx / dist) * force;
+          const ty = (dy / dist) * force;
+          const fade = 0.08 + (dist / RADIUS) * (opacity - 0.08);
+          span.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px))`;
+          span.style.opacity = String(fade);
+        } else {
+          span.style.transform = "translate(-50%, -50%)";
+          span.style.opacity = String(opacity);
+        }
+      });
+
+      if (activeRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    }
+
+    function onMouseMove(e: MouseEvent) {
+      const rect = container!.getBoundingClientRect();
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      if (!activeRef.current) {
+        activeRef.current = true;
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    }
+
+    function onMouseLeave() {
+      activeRef.current = false;
+      cancelAnimationFrame(rafRef.current);
+      const spans = container!.querySelectorAll<HTMLSpanElement>("[data-plus]");
+      spans.forEach((span) => {
+        span.style.transform = "translate(-50%, -50%)";
+        span.style.opacity = String(opacity);
+      });
+    }
+
+    container.addEventListener("mousemove", onMouseMove);
+    container.addEventListener("mouseleave", onMouseLeave);
+    return () => {
+      container.removeEventListener("mousemove", onMouseMove);
+      container.removeEventListener("mouseleave", onMouseLeave);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [opacity]);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`absolute inset-0 overflow-hidden ${className}`}
+      style={{ pointerEvents: "auto" }}
+    >
+      {dots.map((d, i) => (
+        <span
+          key={i}
+          data-plus
+          data-cx={d.cx}
+          data-cy={d.cy}
+          style={{
+            position: "absolute",
+            left: `${d.cx}%`,
+            top: `${d.cy}%`,
+            fontFamily: "monospace",
+            fontSize: 11,
+            color: "white",
+            opacity,
+            pointerEvents: "none",
+            userSelect: "none",
+            willChange: "transform",
+            transform: "translate(-50%, -50%)",
+            transition: "transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease",
+          }}
+        >
+          +
+        </span>
+      ))}
+    </div>
+  );
+}
+
 /* ─── font stacks — Flux system fonts ─── */
 const serif = { fontFamily: "var(--font-geist-sans), system-ui, sans-serif" } as const; // headings — Geist Sans
 const mono  = { fontFamily: "var(--font-geist-mono), monospace" } as const;             // labels, nav, tags, code
@@ -42,6 +171,175 @@ function Marquee() {
         ))}
       </div>
       <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
+   HERO TERMINAL — realistic npm install
+════════════════════════════════════════ */
+const HERO_LINES: { text: string; color: string; delay?: number; prefix?: string }[] = [
+  { text: "npm install @payglocal_ui/flux-ui", color: "#e2e8f0", prefix: "❯ " },
+  { text: "", color: "" },
+  { text: "npm warn deprecated inflight@1.0.6", color: "#6b7280" },
+  { text: "added 68 packages in 3.2s", color: "#6b7280" },
+  { text: "", color: "" },
+  { text: "4 packages are looking for funding", color: "#6b7280" },
+  { text: "  run `npm fund` for details", color: "#4b5563" },
+  { text: "", color: "" },
+  { text: "+ @payglocal_ui/flux-ui@0.2.1", color: "#34d399" },
+  { text: "", color: "" },
+  { text: "importing components...", color: "#6b7280", prefix: "❯ " },
+  { text: "", color: "" },
+  { text: 'import { Button, Card, DataTable } from "@payglocal_ui/flux-ui"', color: "#93c5fd" },
+  { text: "", color: "" },
+  { text: "✓ Button         — 6 variants, 3 sizes", color: "#34d399" },
+  { text: "✓ Card           — with header, footer slots", color: "#34d399" },
+  { text: "✓ DataTable      — pagination, density, skeletons", color: "#34d399" },
+  { text: "✓ StatusBadge    — payment workflow states", color: "#34d399" },
+  { text: "✓ CurrencyInput  — 7 currencies supported", color: "#34d399" },
+  { text: "  ... 63 more components available", color: "#6b7280" },
+  { text: "", color: "" },
+  { text: "✓ ready in 0ms", color: "#34d399" },
+];
+
+function HeroTerminal() {
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [charCount, setCharCount] = useState(0);
+  const rafRef = useRef<number>(0);
+  const stateRef = useRef({ line: 0, char: 0, pause: 0 });
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom as lines appear
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [visibleLines, charCount]);
+
+  useEffect(() => {
+    const CHAR_DELAY = 28;
+    const LINE_PAUSE = 80;
+    const FAST_PAUSE = 30;
+    const END_PAUSE = 3000;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = now - last;
+      const s = stateRef.current;
+
+      if (s.pause > 0) {
+        s.pause -= dt;
+        last = now;
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      const line = HERO_LINES[s.line];
+      const fullText = (line.prefix || "") + line.text;
+
+      if (s.char < fullText.length) {
+        const steps = Math.floor(dt / CHAR_DELAY);
+        if (steps > 0) {
+          s.char = Math.min(s.char + steps, fullText.length);
+          setCharCount(s.char);
+          last = now;
+        }
+      } else {
+        s.line++;
+        s.char = 0;
+        setCharCount(0);
+        if (s.line >= HERO_LINES.length) {
+          s.pause = END_PAUSE;
+          s.line = 0;
+          setVisibleLines(0);
+        } else {
+          const isEmpty = HERO_LINES[s.line].text === "";
+          s.pause = isEmpty ? FAST_PAUSE : LINE_PAUSE;
+          setVisibleLines(s.line);
+        }
+        last = now;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  return (
+    <div className="flex h-full w-full flex-col overflow-hidden rounded-xl bg-[#0d1117] font-mono text-[13px]" style={{ ...mono, border: "1px solid rgba(255,255,255,0.08)" }}>
+      {/* Title bar */}
+      <div className="flex shrink-0 items-center gap-2 border-b border-white/[0.06] bg-[#161b22] px-4 py-3">
+        <div className="flex gap-1.5">
+          <div className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+          <div className="h-3 w-3 rounded-full bg-[#febc2e]" />
+          <div className="h-3 w-3 rounded-full bg-[#28c840]" />
+        </div>
+        <span className="text-[11px] uppercase tracking-[0.2em] text-white/30" style={mono}>Terminal</span>
+      </div>
+
+      {/* Terminal body */}
+      <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto p-5 leading-[1.7]" style={{ scrollbarWidth: "none" }}>
+        {/* Prompt line at top */}
+        <div className="mb-1 flex items-center gap-2 text-[11px] text-white/20">
+          <span className="text-emerald-500/60">user</span>
+          <span className="text-white/15">@</span>
+          <span className="text-blue-400/60">payglocal</span>
+          <span className="text-white/15">~</span>
+          <span className="text-white/15">%</span>
+        </div>
+
+        {HERO_LINES.map((line, i) => {
+          const fullText = (line.prefix || "") + line.text;
+          const isPrefix = !!line.prefix;
+
+          if (i < visibleLines) {
+            return (
+              <div key={i} style={{ color: line.color || "transparent", minHeight: "1.7em" }}>
+                {isPrefix ? (
+                  <>
+                    <span className="text-emerald-400">{line.prefix}</span>
+                    <span>{line.text}</span>
+                  </>
+                ) : fullText}
+              </div>
+            );
+          }
+
+          if (i === visibleLines) {
+            const partial = fullText.slice(0, charCount);
+            const prefixLen = (line.prefix || "").length;
+            const prefixPart = partial.slice(0, prefixLen);
+            const textPart = partial.slice(prefixLen);
+
+            return (
+              <div key={i} style={{ color: line.color || "transparent", minHeight: "1.7em" }}>
+                {isPrefix ? (
+                  <>
+                    <span className="text-emerald-400">{prefixPart}</span>
+                    <span>{textPart}</span>
+                  </>
+                ) : partial}
+                <span
+                  className="inline-block align-middle"
+                  style={{
+                    width: 2,
+                    height: "0.9em",
+                    background: "#e2e8f0",
+                    marginLeft: 1,
+                    animation: "blink 1s step-end infinite",
+                  }}
+                />
+              </div>
+            );
+          }
+
+          return null;
+        })}
+      </div>
+
+      <style>{`@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}`}</style>
     </div>
   );
 }
@@ -213,6 +511,101 @@ function DotGrid({ cols = 26, rows = 14 }: { cols?: number; rows?: number }) {
 }
 
 /* ════════════════════════════════════════
+   PAYGLOCAL PIXEL WORDMARK
+════════════════════════════════════════ */
+
+// Each letter: 5 cols × 7 rows bitmap
+// Block sizes vary per row to match reference aesthetic
+const PG_FONT: Record<string, number[]> = {
+  P: [0b11110, 0b10001, 0b10001, 0b11110, 0b10000, 0b10000, 0b10000],
+  A: [0b01110, 0b10001, 0b10001, 0b11111, 0b10001, 0b10001, 0b10001],
+  Y: [0b10001, 0b10001, 0b01010, 0b00100, 0b00100, 0b00100, 0b00100],
+  G: [0b01111, 0b10000, 0b10000, 0b10111, 0b10001, 0b10001, 0b01111],
+  L: [0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b10001, 0b11111],
+  O: [0b01110, 0b10001, 0b10001, 0b10001, 0b10001, 0b10001, 0b01110],
+  C: [0b01111, 0b10000, 0b10000, 0b10000, 0b10000, 0b10000, 0b01111],
+};
+
+// Row height varies to create visual interest like the reference
+const ROW_HEIGHTS = [18, 22, 20, 16, 20, 22, 18];
+const ROW_VGAP = 5;
+
+function PixelWordmark() {
+  const WORD = "PAYGLOCAL";
+  const COLS = 5;
+  const BW = 18;      // block width — wide rectangles
+  const HGAP = 6;     // horizontal gap
+  const HSTEP = BW + HGAP;
+  const LETTER_SPACE = 24;
+  const MARGIN_X = 0;
+  const MARGIN_Y = 12;
+
+  // Pre-compute total height
+  const totalH = ROW_HEIGHTS.reduce((s, h) => s + h + ROW_VGAP, 0) + MARGIN_Y * 2;
+
+  // Pre-compute letter widths and total width to scale viewBox
+  const letterW = COLS * HSTEP - HGAP;
+  const totalW = WORD.length * (letterW + LETTER_SPACE) - LETTER_SPACE + MARGIN_X * 2;
+
+  // Build rects with staggered animation delays
+  const rects: React.ReactNode[] = [];
+  let xCursor = MARGIN_X;
+
+  WORD.split("").forEach((ch, li) => {
+    const rows = PG_FONT[ch] ?? [];
+    let yCursor = MARGIN_Y;
+
+    rows.forEach((row, ri) => {
+      const bh = ROW_HEIGHTS[ri];
+      for (let bit = COLS - 1; bit >= 0; bit--) {
+        if ((row >> bit) & 1) {
+          const x = xCursor + (COLS - 1 - bit) * HSTEP;
+          const animDelay = `${((li * 7 + ri + (COLS - 1 - bit)) * 0.04).toFixed(2)}s`;
+          rects.push(
+            <rect
+              key={`${li}-${ri}-${bit}`}
+              x={x} y={yCursor}
+              width={BW} height={bh}
+              rx="3"
+              fill="white"
+              fillOpacity="0"
+            >
+              <animate
+                attributeName="fill-opacity"
+                values="0;0.35;0.22;0.35"
+                dur="4s"
+                begin={animDelay}
+                repeatCount="indefinite"
+                calcMode="spline"
+                keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+              />
+            </rect>
+          );
+        }
+      }
+      yCursor += bh + ROW_VGAP;
+    });
+
+    xCursor += letterW + LETTER_SPACE;
+  });
+
+  return (
+    <div className="overflow-hidden border-t border-white/[0.04] w-full py-16 lg:py-24">
+      <svg
+        viewBox={`0 0 ${totalW} ${totalH}`}
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full"
+        preserveAspectRatio="xMidYMid meet"
+        aria-label="PayGlocal"
+        style={{ display: "block" }}
+      >
+        {rects}
+      </svg>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════
    FAQ ACCORDION
 ════════════════════════════════════════ */
 const FAQS = [
@@ -303,10 +696,8 @@ export default function LandingPage() {
       <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-white/[0.07] bg-[#0a0a0a]/95 px-6 backdrop-blur lg:px-10">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
-          <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none">
-            <rect width="32" height="32" rx="7" fill="#2563eb"/>
-            <path d="M8 9h16M8 16h10M8 23h13" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/flux-logo.svg" alt="Flux UI" className="h-7 w-7 shrink-0" />
           <span className="text-[11px] uppercase tracking-[0.2em] text-white/80" style={mono}>Flux UI</span>
           <span className="rounded border border-blue-500/40 bg-blue-600/20 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-blue-400" style={mono}>v0.2</span>
         </Link>
@@ -396,15 +787,14 @@ export default function LandingPage() {
           {/* Divider */}
           <div className="hidden bg-white/[0.06] lg:block" />
 
-          {/* Right — hero image, edge-to-edge */}
-          <div className="relative hidden overflow-hidden lg:block">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/hero-doc.png"
-              alt="Flux UI design system"
-              className="h-full w-full object-cover object-center"
-              style={{ minHeight: 420 }}
-            />
+          {/* Right — hero terminal centred with + grid bg */}
+          <div className="relative hidden lg:flex lg:items-center lg:justify-center" style={{ background: "#0a0a0a", overflow: "hidden" }}>
+            {/* + grid fills the full flex cell — inset-0 stretches to parent height */}
+            <PlusGrid cols={38} rows={22} opacity={0.18} className="z-0" />
+            {/* Terminal card — centred */}
+            <div className="relative z-10 w-[92%] max-w-[624px] my-12" style={{ height: 408, boxShadow: "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)" }}>
+              <HeroTerminal />
+            </div>
           </div>
 
         </div>
@@ -534,22 +924,28 @@ export default function LandingPage() {
       {/* ── FOOTER ── */}
       <footer className="border-t border-white/[0.06] bg-[#0a0a0a] px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-[1400px]">
-          <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
+          <div className="flex flex-col gap-12 pb-8 lg:flex-row lg:justify-between">
             <div className="max-w-xs space-y-5">
               <div className="flex items-center gap-2.5">
-                <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none">
-                  <rect width="32" height="32" rx="7" fill="#2563eb"/>
-                  <path d="M8 9h16M8 16h10M8 23h13" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-                </svg>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/flux-logo.svg" alt="Flux UI" className="h-8 w-8 shrink-0" />
                 <span className="text-[13px] uppercase tracking-[0.2em] text-white/70" style={mono}>Flux UI</span>
               </div>
               <p className="text-[15px] leading-relaxed text-white/40" style={sans}>
                 Open design system by PayGlocal Technologies. MIT licensed.
                 Built with React, Tailwind CSS v4, and Radix UI.
               </p>
-              <div className="flex gap-5">
-                <a href={GH_URL}  target="_blank" rel="noreferrer" className="text-[11px] uppercase tracking-[0.18em] text-white/35 hover:text-white/70" style={mono}>GitHub ↗</a>
-                <a href={NPM_URL} target="_blank" rel="noreferrer" className="text-[11px] uppercase tracking-[0.18em] text-white/35 hover:text-white/70" style={mono}>npm ↗</a>
+              <div className="flex gap-3">
+                <a href={GH_URL} target="_blank" rel="noreferrer"
+                  className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-[11px] uppercase tracking-[0.14em] text-white/50 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white/80"
+                  style={mono}>
+                  <Github className="size-3" /> GitHub
+                </a>
+                <a href={NPM_URL} target="_blank" rel="noreferrer"
+                  className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-[11px] uppercase tracking-[0.14em] text-white/50 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white/80"
+                  style={mono}>
+                  ↗ npm
+                </a>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
@@ -592,10 +988,15 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
-          <div className="mt-12 flex items-center justify-between border-t border-white/[0.06] pt-8">
-            <span className="text-[13px] text-white/30" style={sans}>© 2026 PayGlocal Technologies</span>
-            <span className="text-[11px] uppercase tracking-[0.18em] text-white/20" style={mono}>MIT License</span>
-          </div>
+        </div>
+
+        {/* PAYGLOCAL pixel wordmark */}
+        <PixelWordmark />
+
+        {/* Copyright bar — bottom of everything */}
+        <div className="flex items-center justify-between border-t border-white/[0.06] px-6 py-3 lg:px-10">
+          <span className="text-[13px] text-white/30" style={sans}>© 2026 PayGlocal Technologies</span>
+          <span className="text-[11px] uppercase tracking-[0.18em] text-white/20" style={mono}>MIT License</span>
         </div>
       </footer>
 

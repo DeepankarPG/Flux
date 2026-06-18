@@ -9,5 +9,8 @@
     "dev:docs": "npm run dev --workspace=apps/docs",
     "build:docs": "npm run build --workspace=apps/docs",
     "build:ui": "npm run check-types --workspace=packages/flux-ui"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
   }
 }
