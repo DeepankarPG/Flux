@@ -145,7 +145,7 @@ const NPM_URL = "https://www.npmjs.com/package/@payglocal_ui/flux-ui";
    MARQUEE  (+ dividers, full-width dark)
 ════════════════════════════════════════ */
 const MARQUEE = [
-  "Make your app AI-ready",
+  "Design system",
   "68+ components",
   "Tailwind v4",
   "Open source",
@@ -669,7 +669,7 @@ function InstallCommand() {
   };
 
   return (
-    <div className="mt-10 flex max-w-md items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
+    <div className="mt-6 inline-flex w-fit items-center gap-4 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3">
       <code className="text-[13px] text-white/60" style={mono}>
         npm i <span className="text-white">@payglocal_ui/flux-ui</span>
       </code>
@@ -737,11 +737,11 @@ export default function LandingPage() {
         {/* Blue glow top-left only */}
         <div className="pointer-events-none absolute -left-40 -top-20 h-[400px] w-[500px] rounded-full bg-blue-600/10 blur-[100px]" />
 
-        <div className="relative mx-auto grid max-w-[1400px] min-h-[420px] grid-cols-1 gap-0 border-x border-white/[0.06] lg:grid-cols-[1fr_1px_1fr]">
+        <div className="relative mx-auto grid max-w-[1400px] grid-cols-1 gap-0 border-x border-white/[0.06] lg:grid-cols-[1fr_1px_1fr]" style={{ height: "calc(100dvh - 56px - 36px - 80px - 48px)", minHeight: 420 }}>
           {/* Left — copy */}
-          <div className="flex flex-col justify-center px-8 py-12 lg:px-14">
+          <div className="flex flex-col justify-center px-8 py-8 lg:px-14">
             {/* Eyebrow */}
-            <div className="mb-8 inline-flex w-fit items-center gap-2 rounded border border-white/10 bg-white/[0.04] px-3 py-1.5">
+            <div className="mb-5 inline-flex w-fit items-center gap-2 rounded border border-white/10 bg-white/[0.04] px-3 py-1.5">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-400" />
               <span className="text-[9px] uppercase tracking-[0.22em] text-white/50" style={mono}>
                 Now live · Open source design system
@@ -753,7 +753,7 @@ export default function LandingPage() {
               we ship in product.
             </h1>
 
-            <p className="mt-6 max-w-[400px] text-[14px] leading-relaxed text-white/45" style={sans}>
+            <p className="mt-4 max-w-[400px] text-[14px] leading-relaxed text-white/45" style={sans}>
               Flux UI delivers 68+ production-grade components, semantic design tokens,
               and patterns — same system PayGlocal uses in the merchant dashboard.
             </p>
@@ -762,7 +762,7 @@ export default function LandingPage() {
             <InstallCommand />
 
             {/* CTAs */}
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-3 flex items-center gap-3">
               <Link href="/docs/installation"
                 className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-[var(--primary-hover)]"
                 style={sans}>
@@ -775,12 +775,55 @@ export default function LandingPage() {
               </a>
             </div>
 
-            {/* Compatible with */}
-            <div className="mt-8 flex items-center gap-4">
-              <span className="text-[10px] uppercase tracking-[0.18em] text-white/25" style={mono}>Works with:</span>
-              {["Next.js", "Vite", "Remix", "Turbopack"].map(f => (
-                <span key={f} className="text-[10px] text-white/35" style={mono}>{f}</span>
-              ))}
+            {/* Compatible with — logos */}
+            <div className="mt-5 flex items-center gap-3">
+              <span className="text-[10px] uppercase tracking-[0.18em] text-white/25 shrink-0" style={mono}>Works with:</span>
+              {/* Next.js */}
+              <svg className="h-5 w-auto opacity-100 transition-opacity" viewBox="0 0 180 180" fill="none" aria-label="Next.js">
+                <mask id="nxt" style={{maskType:"alpha"}} maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
+                  <circle cx="90" cy="90" r="90" fill="black"/>
+                </mask>
+                <g mask="url(#nxt)">
+                  <circle cx="90" cy="90" r="90" fill="white"/>
+                  <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L140.999 164.845C143.926 162.425 146.778 159.843 149.508 157.52Z" fill="url(#nxt-g1)"/>
+                  <rect x="115" y="54" width="12" height="72" fill="url(#nxt-g2)"/>
+                </g>
+                <defs>
+                  <linearGradient id="nxt-g1" x1="109" y1="116.5" x2="144.5" y2="160.5" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="black"/><stop offset="1" stopColor="black" stopOpacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="nxt-g2" x1="115" y1="54" x2="115.5" y2="106.5" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="black"/><stop offset="1" stopColor="black" stopOpacity="0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              {/* Vite */}
+              <svg className="h-5 w-auto opacity-100 transition-opacity" viewBox="0 0 410 404" fill="none" aria-label="Vite">
+                <path d="M399.641 59.5246L215.643 388.545C211.844 395.338 202.084 395.378 198.228 388.618L10.5817 59.5246C6.38087 52.1904 12.6802 43.2652 21.0281 44.7341L205.965 77.2197C207.6 77.5028 209.27 77.5028 210.905 77.2197L391.092 44.7341C399.44 43.2652 405.739 52.1904 399.641 59.5246Z" fill="url(#vite-g1)"/>
+                <path d="M292.965 1.5744L156.801 28.2552C154.563 28.6937 152.906 30.5903 152.771 32.8664L144.395 174.33C144.198 177.662 147.258 180.248 150.51 179.498L188.42 170.749C191.967 169.931 195.172 172.928 194.671 176.54L182.368 263.009C181.853 266.677 185.173 269.686 188.741 268.752L210.513 263.041C214.087 262.105 217.411 265.127 216.878 268.799L198.819 390.893C198.124 395.457 204.354 397.842 207.166 394.02L209.198 391.237L323.071 149.166C324.922 145.308 321.816 140.93 317.578 141.74L278.281 149.445C274.59 150.166 271.499 146.981 272.351 143.313L308.915 30.2581C309.768 26.5842 306.664 23.3981 302.966 24.132L292.965 1.5744Z" fill="url(#vite-g2)"/>
+                <defs>
+                  <linearGradient id="vite-g1" x1="6" y1="32.9909" x2="235" y2="344.991" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#41D1FF"/><stop offset="1" stopColor="#BD34FE"/>
+                  </linearGradient>
+                  <linearGradient id="vite-g2" x1="194.651" y1="8.81818" x2="236.076" y2="292.989" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FF3E00"/><stop offset="1" stopColor="#FFD438"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              {/* Remix — wordmark R */}
+              <svg className="h-5 w-auto opacity-100 transition-opacity" viewBox="0 0 78 65" fill="white" aria-label="Remix">
+                <path fillRule="evenodd" clipRule="evenodd" d="M55.5 64.9998H77.7813C77.7813 64.9998 77.5226 57.6372 72.4306 52.5452C67.9636 48.0782 62.3979 47.7052 59.781 47.7052V47.6984C59.781 47.6984 71.3574 46.0836 71.3574 32.3562C71.3574 18.6288 60.0948 13 41.7258 13H0V64.9998H22.752V50.5978H40.038C40.038 50.5978 55.5 50.5978 55.5 64.9998ZM22.752 30.1098V37.0428H39.6218C45.6116 37.0428 49.2372 35.1682 49.2372 30.4468C49.2372 25.7254 45.6116 23.8508 39.6218 23.8508H22.752V30.1098Z"/>
+              </svg>
+              {/* Turbopack — simple T wordmark */}
+              <svg className="h-5 w-auto opacity-100 transition-opacity" viewBox="0 0 64 64" fill="none" aria-label="Turbopack">
+                <path d="M32 4L56 16V40L32 60L8 40V16L32 4Z" fill="url(#turbo-g)"/>
+                <text x="50%" y="56%" dominantBaseline="middle" textAnchor="middle" fontSize="22" fontWeight="700" fill="white" fontFamily="sans-serif">T</text>
+                <defs>
+                  <linearGradient id="turbo-g" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FF1E56"/><stop offset="1" stopColor="#FF6B00"/>
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
           </div>
 
@@ -806,9 +849,9 @@ export default function LandingPage() {
             { label: "Tailwind CSS version", val: "v4_"  },
             { label: "Open source license",  val: "MIT_" },
           ].map((s, i) => (
-            <div key={s.label} className={`px-8 py-7 ${i < 2 ? "border-r border-white/[0.06]" : ""}`}>
+            <div key={s.label} className={`px-8 py-4 ${i < 2 ? "border-r border-white/[0.06]" : ""}`}>
               <p className="text-[9px] uppercase tracking-[0.2em] text-white/25 mb-2" style={mono}>{s.label}</p>
-              <p className="text-[2rem] font-semibold text-white" style={serif}>{s.val}</p>
+              <p className="text-[1.5rem] font-semibold text-white" style={serif}>{s.val}</p>
             </div>
           ))}
         </div>
