@@ -912,34 +912,25 @@ export default function LandingPage() {
       </section>
 
       {/* ── ALTERNATING FEATURES ── */}
-      {[
-        { cat: "Developer experience",
-          title: "Install in one command.\nStart building immediately.",
-          body: "Configure Tailwind v4 with two @source lines, paste the CSS token block, add transpilePackages. Works with Turbopack, Webpack, and Vite.",
-          href: "/docs/installation", cta: "Installation guide",
-          visual: <TypewriterCode />,
-        },
-      ].map((feat, i) => (
-        <section key={i} className="border-t border-white/[0.06] bg-[#0a0a0a] px-6 py-20 lg:px-10 lg:py-24">
-          <div className="mx-auto max-w-[1400px]">
-            <div className={`grid gap-16 lg:grid-cols-2 lg:items-center ${i % 2 === 1 ? "" : ""}`}>
-              <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                <p className="mb-3 text-[9px] uppercase tracking-[0.22em] text-blue-400" style={mono}>{feat.cat}</p>
+      <section className="border-t border-white/[0.06] bg-[#0a0a0a] px-6 py-20 lg:px-10 lg:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="mb-3 text-[9px] uppercase tracking-[0.22em] text-blue-400" style={mono}>Developer experience</p>
                 <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-normal leading-[1.06] tracking-tight text-white whitespace-pre-line" style={serif}>
-                  {feat.title}
+                  {"Install in one command.\nStart building immediately."}
                 </h2>
-                <p className="mt-5 text-[14px] leading-relaxed text-white/40" style={sans}>{feat.body}</p>
-                <Link href={feat.href}
+                <p className="mt-5 text-[14px] leading-relaxed text-white/40" style={sans}>Configure Tailwind v4 with two @source lines, paste the CSS token block, add transpilePackages. Works with Turbopack, Webpack, and Vite.</p>
+                <Link href="/docs/installation"
                   className="mt-8 inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-white/50 underline-offset-4 hover:text-white"
                   style={mono}>
-                  {feat.cta} <ArrowUpRight className="size-3.5" />
+                  Installation guide <ArrowUpRight className="size-3.5" />
                 </Link>
               </div>
-              <div className={i % 2 === 1 ? "lg:order-1" : ""}>{feat.visual}</div>
+              <div><TypewriterCode /></div>
             </div>
           </div>
         </section>
-      ))}
 
       {/* ── FAQ — light ── */}
       <section className="border-t border-zinc-200 bg-white px-6 py-20 lg:px-10 lg:py-28">
